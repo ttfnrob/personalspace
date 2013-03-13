@@ -1,0 +1,71 @@
+<html>
+<head>
+<title>
+Your Sky Space
+</title>
+</head>
+
+<body>
+<h1>Your Sky Space</h1>
+
+<form method="get" name="request" action="http://www.fourmilab.ch/cgi-bin/Yourtel" target="ifrejm">
+
+<input type="submit" value="Update" />
+
+<!-- <input type="radio" name="date" onclick="0" value="0" /> Now -->
+<input type="hidden" name="date" onclick="0" checked="checked" value="1" /> Universal time:
+<input type="text" name="utc" value="1998/02/14 20:55:01" size="20"/>
+<!-- <input type="radio" name="date" onclick="0" value="2" /> Julian day:
+<input type="text" name="jd" value="2450859.37154" size="20"/> -->
+
+Right Ascension:
+<input type="text" name="lon" value="0" size="15" />
+Declination:
+<input type="text" name="lat" value="0" size="15" />
+<input type="radio" name="ns" checked="checked" value="North" /> North
+<input type="radio" name="ns" value="South" /> South
+Field of view:
+<input type="text" name="fov" value="45" size="10" />
+
+<input type="hidden" checked="checked" name="coords" /> <!-- Ecliptic and equator -->
+<input type="hidden" checked="checked" name="moonp" /> <!-- Moon and planets -->
+<input type="hidden" checked="checked" name="deep" />  <!-- Deep sky objects of magnitude -->
+<input type="hidden" name="deepm" value="5.0" size="3" /> <!-- and brighter -->
+
+<input type="hidden" checked="checked" name="consto" /> <!-- Outlines -->
+<input type="hidden" checked="checked" name="constn" /> <!-- Names -->
+<input type="hidden" name="consts" /> <!--  abbreviate? -->
+<input type="hidden" checked="checked" name="constb" /> <!-- Boundaries -->
+
+Show stars brighter than magnitude <input type="text" name="limag" value="6.0" size="5" />
+<input type="hidden" checked="checked" name="starn" /><!-- Names for magnitude -->
+<input type="hidden" name="starnm" value="3.0" size="5" /><!-- and brighter -->
+
+<input type="hidden" checked="checked" name="starb" /><!-- Bayer/Flamsteed codes for mag.-->
+
+<!--
+<input type="hidden" name="starbm" value="-100.0" size="5" /> and brighter
+<input type="checkbox" name="showm" /> Show magnitudes between
+<input type="text" name="showmb" value="-1.5" size="5" /> and <input type="text" name="showmd" value="6.0" size="5" />
+-->
+<input type="hidden" name="flip" /> <!-- Invert North and South -->
+
+<!-- Image size: --><input type="hidden" name="imgsize" value="512" size="6" /><!-- pixels -->
+
+<input type="hidden" name="dynimg" value="y" />
+<!--
+    Dynamic image request
+Font scale: <input type="text" name="fontscale" value="1.0" size="4" />
+
+Colour scheme: <select name="scheme" size="1">
+<option value="0" selected="selected">Colour</option>
+<option value="1">Black on white background</option>
+<option value="2">White on black background</option>
+<option value="3">Night vision (red)</option>
+</select>
+-->
+</form>
+<iframe name="ifrejm" height="512" width="512" src="dummy.html">
+</iframe>
+</body>
+</html>
