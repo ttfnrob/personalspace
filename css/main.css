@@ -149,6 +149,10 @@ nav a:hover {
     padding: 20px 0;
 }
 
+.footer-container footer a {
+    color: white;
+}
+
 /* ===============
     ALL: IE Fixes
    =============== */
