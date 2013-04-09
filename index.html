@@ -14,14 +14,16 @@
         <link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/jquery-ui-1.10.1.custom.min.css">
         <link rel="stylesheet" href="css/jquery.ui.timepicker.css">
+        <link rel="stylesheet" href="js/vendor/vallenato/vallenato.css">
 
-        <script src="http://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
         <script src="js/vendor/jquery-1.9.1.min.js"></script>
         <script src="js/vendor/jquery-ui-1.10.1.custom.min.js"></script>
         <script src="js/vendor/jquery.ui.timepicker.js"></script>
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         <script src="js/vendor/wwt.aspx"></script>
         <script src="js/vendor/jquery.geocomplete.min.js"></script>
+
     </head>
     <body>
         <!--[if lt IE 7]>
@@ -31,115 +33,73 @@
         <!--[if lt IE 9]>
             <script src="js/virtualsky/excanvas.min.js" type="text/javascript"></script>
         <![endif]-->
+        <div id="main-box" class="main-container">
 
-        <div class="header-container">
-            <header class="wrapper clearfix">
-                <h1 class="title">Personal Space</h1>
-                <nav>
-                    <ul>
-                        <li><a id="main-link" href="#">Main</a></li>
-                        <li><a id="about-link" href="#">About</a></li>
-                        <li><a id="objects-link" href="#">Objects</a></li>
-                    </ul>
-                </nav>
-            </header>
-        </div>
-
-        <div id="main-box" class="main-container"></div>
-
-        <div id="homepage" class="main-content">
+            <div id="WWTCanvasPre" style="height:500px;960px;"></div>
             <div class="main wrapper clearfix">
 
-                <article>
-                    <header>
-                        <p>Ever wondered about the stars above your head at a moment in your life? Type in the details of an event on the right to find the part of the sky that was directly over your head at the time.</p>
-                    </header>
-                    <section id="WWTCanvasPre" style="height:584px;width:584px;"></section>
-                    <footer></footer>
-                </article>
+                <div id="people" class="icon">
+                    <img src="img/person.png" /><span class="badge" id="match_count"></span>
+                    <div id="match-accordion" class="acc">
+                        <h2>Find your space to see connections to other people.</h2>
+                    </div>
+                </div>
+                
+                <div id="planets" class="icon">
+                    <img src="img/planet.png"/><span class="badge" id="planet_count"></span>
+                    <div id="planets-accordion" class="acc">
+                        <h2>Planets in your personal space will appear here.</h2>
+                    </div>
+                </div>
 
-                <aside>
-                    <h3>About</h3>
-                    <form id="getspace" oninput="a=b">
+                <div id="deepsky" class="icon">
+                    <img src="img/galaxy.png"/><span class="badge" id="deepsky_count"></span>
+                    <div id="deepsky-accordion" class="acc">
+                        <h2>Deep sky objects in your personal space will appear here.</h2>
+                    </div>
+                </div>
 
-                        <label>Full name:</label>
-                        <input type="text" id="full_name" name="name" value="Jane Doe" required>
+                <section class="popup">
+                    <form id="getspace">
 
-                        <label>Location:</label>
-                        <input type="text" id="place_name" name="place" value="Oxford, UK" required>
-
-                        <label>Lat:</label>
-                        <input type="text" data-geo="lat" id="latitude" name="lat" value="52.1245" required>
-
-                        <label>Lon:</label>
-                        <input type="text" data-geo="lng" id="longitude" name="lon" value="-1.2456" required>
-
-                        <label>Event Date:</label>
-                        <input type="date" id="date" name="event_date" value="2001-01-01" required>
-
-                        <label>Event Time:</label>
-                        <input type="time" id="time" name="event_time" value="12:23:45" required>
+                        <label>Name:</label>
+                        <input type="text" id="full_name" name="name" placeholder="Jane Doe" required>
 
                         <label>Event Name:</label>
-                        <input type="text" id="event_name" name="event" value="Birthday" required>
+                        <input type="text" id="event_name" name="event" placeholder="e.g. Birthday" required>
 
-                        <input class="submit_button" type="submit" value="Find Your Space" /> 
+                        <label>Location:</label>
+                        <input type="text" id="place_name" name="place" placeholder="Oxford, UK" required>
+                        <!-- Hidden Lat/Lon fields -->
+                        <input type="text" data-geo="lat" id="latitude" name="lat" required>
+                        <input type="text" data-geo="lng" id="longitude" name="lon" required>
+
+                        <label>Event Date:</label>
+                        <input type="date" id="date" name="event_date" placeholder="2013-01-01" required>
+
+                        <label title="Time of event in local time at location">Local Time:</label>
+                        <input title="Time of event in local time at location" type="time" id="time" name="event_time" placeholder="14:00" required>
+
+                        <input class="submit_button" type="submit" id="submit_button" value="Find Your Space" /> 
                     </form>
-                </aside>
+                </section>
 
             </div> <!-- #main -->
         </div> <!-- #homepage-content -->
 
-        <div id="about" class="main-content">
-            <div class="main wrapper clearfix">
-
-                <article>
-                    <header>
-                        <h1>About</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales urna non odio egestas tempor. Nunc vel vehicula ante. Etiam bibendum iaculis libero, eget molestie nisl pharetra in. In semper consequat est, eu porta velit mollis nec.</p>
-                    </header>
-                    <section>
-                        <h2>article section h2</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales urna non odio egestas tempor. Nunc vel vehicula ante. Etiam bibendum iaculis libero, eget molestie nisl pharetra in. In semper consequat est, eu porta velit mollis nec. Curabitur posuere enim eget turpis feugiat tempor. Etiam ullamcorper lorem dapibus velit suscipit ultrices. Proin in est sed erat facilisis pharetra.</p>
-                    </section>
-                </article>
-
-                <aside>
-                    <h3>About</h3>
-                    <p>The stars above your head are constantly moving as the Earth turns. In fact, the exact position of the stars depends on your location and the time.</p>
-                </aside>
-
-            </div> <!-- #main -->
-        </div> <!-- #about-container -->
-
-        <div id="objects" class="main-content">
-            <div class="main wrapper clearfix">
-
-                <article>
-                    <header>
-                        <h1>Databases Included</h1>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales urna non odio egestas tempor. Nunc vel vehicula ante. Etiam bibendum iaculis libero, eget molestie nisl pharetra in. In semper consequat est, eu porta velit mollis nec.</p>
-                    </header>
-                    <section>
-                        <h2>article section h2</h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam sodales urna non odio egestas tempor. Nunc vel vehicula ante. Etiam bibendum iaculis libero, eget molestie nisl pharetra in. In semper consequat est, eu porta velit mollis nec. Curabitur posuere enim eget turpis feugiat tempor. Etiam ullamcorper lorem dapibus velit suscipit ultrices. Proin in est sed erat facilisis pharetra.</p>
-                    </section>
-                </article>
-
-                <aside>
-                    <h3>About</h3>
-                    <p>The stars above your head are constantly moving as the Earth turns. In fact, the exact position of the stars depends on your location and the time.</p>
-                </aside>
-
-            </div> <!-- #main -->
-        </div> <!-- #objects-container -->
-
-        <div class="footer-container">
-            <footer class="wrapper">
+        <div class="footer-container">          
+            <section>
+                <div id="zoom_in" class="zoom_button"><img src="img/zoom_in.png"/></div>
+                <div id="zoom_out" class="zoom_button"><img src="img/zoom_out.png"/></div>
+                <h2 id="pTitle">Personal Space</h2>
+                <p id="shortURL"></p>
+            </section>
+            <aside>
                 <p>Supported by the <a href="http://www.gloria-project.eu">GLORIA Project</a></p>
-            </footer>
+            </aside>
         </div>
 
+        <script src="js/functions.js"></script>
         <script src="js/main.js"></script>
 
         <script>
@@ -151,19 +111,19 @@
 
         <script type="text/javascript">
             $(document).ready(function(){
-                mainContent('homepage');
+                setupPage();
+
                 $("#place_name").geocomplete({
-                  details: "#getspace",
-                  detailsAttribute: "data-geo"
+                        details: "#getspace",
+                        detailsAttribute: "data-geo",
+                    }).bind("geocode:error", function(event, result){
+                        console.log("Geocoding error:");
+                        console.log(result);
+                        $("#place_name").hide().val("Unknown");
+                        $("#latitude").show().val("").attr("placeholder","Lat (e.g. -1.26");
+                        $("#longitude").show().val("").attr("placeholder","Lon (e.g. 141.26");
+                    });
                 });
-                var myDate = new Date();
-                var prettyDate = myDate.getFullYear()+"-"+pad(myDate.getMonth()+1) + '-' + pad(myDate.getDate());
-                var prettyTime = pad(myDate.getHours())+":"+pad(myDate.getMinutes());
-                $("#date").val(prettyDate);
-                $("#time").val(prettyTime);
-                $("#date").datepicker({ dateFormat: 'yy-mm-dd' });
-                $('#time').timepicker();
-            });
 
         </script>
 

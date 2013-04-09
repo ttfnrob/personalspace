@@ -2,6 +2,16 @@
    HTML5 Boilerplate styles - h5bp.com (generated via initializr.com)
    ========================================================================== */
 
+html {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+}
+
 html,
 button,
 input,
@@ -12,7 +22,7 @@ textarea {
 
 body {
     font-size: 1em;
-    line-height: 1.4;
+    line-height: 1.0;
 }
 
 ::-moz-selection {
@@ -62,15 +72,13 @@ textarea {
 
 body {
     font: 16px/26px Helvetica, Helvetica Neue, Arial;
+    background: #000000;
 }
 
 .wrapper {
     width: 90%;
     margin: 0 5%;
-}
-
-.main-content {
-    display: none;
+    height: 100%;
 }
 
 /* ===================
@@ -81,9 +89,36 @@ body {
     border-bottom: 20px solid #222222;
 }
 
+.footer-container {
+ position: fixed;
+ bottom: 0px;
+ left: 0px;
+ width: 100%; 
+ z-index: 100;
+}
+
 .footer-container,
 .main aside {
-    border-top: 20px solid #222222;
+    border-top: 10px solid #222222;
+}
+
+.footer-container aside {
+   position: relative;
+   display: inline-block;
+   right: 220px;
+   bottom: 0px;
+   width: 30%;
+   text-align: right;
+   font-size: 10px;
+}
+
+.footer-container section {
+   position: relative;
+   display: inline-block;
+   left: 15px;
+   bottom: 10px;
+   width: 69%;
+   text-align: left;
 }
 
 .header-container,
@@ -144,12 +179,12 @@ nav a:hover {
     padding: 0px 5% 10px;
 }
 
-.footer-container footer {
+.footer-container {
     color: white;
-    padding: 20px 0;
+    padding: 10px 0 0 0;
 }
 
-.footer-container footer a {
+.footer-container a {
     color: white;
 }
 
@@ -219,17 +254,6 @@ nav a:hover {
 }
 
 @media only screen and (min-width: 768px) {
-
-/* ====================
-    WIDE: CSS3 Effects
-   ==================== */
-
-    .header-container,
-    .main aside {
-        -webkit-box-shadow: 0 5px 10px #aaa;
-           -moz-box-shadow: 0 5px 10px #aaa;
-                box-shadow: 0 5px 10px #aaa;
-    }
 
 /* ============
     WIDE: Menu
@@ -404,50 +428,166 @@ nav a:hover {
     }
 }
 
+#WWTCanvasPre {
+  position: fixed;
+  top: 0px;
+  left: 0px;
+}
+
 /*FORM CSS*/
 
-:invalid { 
-  border-color: #e88;
-  -webkit-box-shadow: 0 0 5px rgba(255, 0, 0, .8);
-  -moz-box-shadow: 0 0 5px rbba(255, 0, 0, .8);
-  -o-box-shadow: 0 0 5px rbba(255, 0, 0, .8);
-  -ms-box-shadow: 0 0 5px rbba(255, 0, 0, .8);
-  box-shadow:0 0 5px rgba(255, 0, 0, .8);
-}
-
-:required {
-  border-color: #88a;
-  -webkit-box-shadow: 0 0 5px rgba(0, 0, 255, .5);
-  -moz-box-shadow: 0 0 5px rgba(0, 0, 255, .5);
-  -o-box-shadow: 0 0 5px rgba(0, 0, 255, .5);
-  -ms-box-shadow: 0 0 5px rgba(0, 0, 255, .5);
-  box-shadow: 0 0 5px rgba(0, 0, 255, .5);
-}
-
 form {
-  width:300px;
-  margin: 20px auto;
+  margin: 5px auto;
 }
 
 input {
   /*font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
   border:1px solid #ccc;
-  font-size:20px;
-  width:300px;
-  min-height:30px;
+  font-size:1.0em;
+  width:150px;
+  /*min-height:30px;*/
   display:block;
-  margin-bottom:15px;
-  margin-top:5px;
+  margin-bottom:8px;
+  margin-top:2px;
   outline: none;
 
-  -webkit-border-radius:5px;
-  -moz-border-radius:5px;
-  -o-border-radius:5px;
-  -ms-border-radius:5px;
-  border-radius:5px;
+  -webkit-border-radius:3px;
+  -moz-border-radius:3px;
+  -o-border-radius:3px;
+  -ms-border-radius:3px;
+  border-radius:3px;
 }
 
 input[type=submit] {
   background:none;
-  padding:10px;
+  padding:5px;
+}
+
+#latitude, #longitude {
+  display: none;
+}
+
+#submit_button {
+  margin-top: 30px;
+  background: #531EBD;
+  color: #ffffff;
+}
+
+#submit_button:hover {
+  margin-top: 30px;
+  background: #6023db;
+  color: #ffffff;
+}
+
+.main section.popup {
+  clear: both;
+  padding: 10px 20px;
+  background: rgba( 255, 255, 255, 0.5);
+  color: #222222;
+  position: absolute;
+  bottom: 10px;
+  right: 15px;
+  z-index: 101;
+  -webkit-border-radius:3px;
+  -moz-border-radius:3px;
+  -o-border-radius:3px;
+  -ms-border-radius:3px;
+  border-radius:3px;
+}
+
+.main section.popup label {
+  font-size: 0.8em;
+  color: #444444;
+}
+
+div.zoom_button {
+  position: absolute;
+  top: -60px;
+  left: 0px;
+  width: 30px;
+  height: 30px;
+  background: rgba( 255, 255, 255, 0.5);
+  color: #222222;
+  padding: 2px;
+  text-align: center;
+  -webkit-border-radius:2px;
+  -moz-border-radius:2px;
+  -o-border-radius:2px;
+  -ms-border-radius:2px;
+  border-radius:2px; 
+  cursor: pointer;
+}
+
+div.zoom_button:hover {
+  background: rgba( 255, 255, 255, 1.0);
+}
+
+div.zoom_button img {
+  width: 100%;
+  height: 100%;
+}
+
+div#zoom_out  {
+  left: 50px;
+}
+
+div.icon {
+  position: absolute;
+  top: 15px;
+  left: 15px;
+  width: 30px;
+  height: 30px;
+  background: rgba( 255, 255, 255, 0.5);
+  color: #222222;
+  padding: 2px;
+  text-align: center;
+  -webkit-border-radius:2px;
+  -moz-border-radius:2px;
+  -o-border-radius:2px;
+  -ms-border-radius:2px;
+  border-radius:2px; 
+  cursor: pointer;
+  z-index: 101;
+}
+
+div.icon:hover {
+  background: rgba( 255, 255, 255, 1.0);
+}
+
+div.icon img {
+  width: 100%;
+  height: 100%;
+}
+
+div#planets  {
+  left: 65px;
+}
+
+div#deepsky  {
+  left: 115px;
+}
+
+span.badge {
+  display: none;
+  -webkit-border-radius:8px;
+  -moz-border-radius:8px;
+  -o-border-radius:8px;
+  -ms-border-radius:8px;
+  border-radius: 8px;
+  background: #cc1919;
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: strong;
+  text-align: center;
+  line-height: 16px;
+  height: 16px;
+  width: 16px;
+  border: 1px solid white; 
+  position: absolute;
+  top: -8px;
+  left: -8px; 
+}
+
+div.acc {
+  /*display: none;*/
 }

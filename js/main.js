@@ -1,57 +1,95 @@
-function pad(n) {
-    return (n < 10) ? ("0" + n) : n;
+function runForm() {
+    
+    checkTimeVal();
+
+    var formData = "name=" + $("input#full_name").val()
+                 + "&place=" + $("input#place_name").val() 
+                 + "&lat=" + $("input#latitude").val() 
+                 + "&lon=" + $("input#longitude").val()
+                 + "&datetime=" + $("input#date").val() + " " + $("input#time").val()
+                 + "&event=" + $("input#event_name").val();
+
+    $.ajax({
+        type: 'POST',
+        url: 'http://personal-space.herokuapp.com/api/create?'+formData,
+        crossDomain: true,
+        data: "",
+        success: function(data, textStatus, jqXHR) {
+            // console.log(parseFloat(data.result.ra), parseFloat(data.result.decl));
+            // window.ra = data.result.ra;
+            // window.decl = data.result.decl;
+            var sep = 20.0;
+            refreshWWT(parseFloat(data.result.ra), parseFloat(data.result.decl));
+            closeAccordions();
+            createWWTCircle(false, '531EBD', '531EBD', 3, 1.0, sep/2.0, true, parseFloat(data.result.ra), parseFloat(data.result.decl));
+            findMatches(parseFloat(data.result.ra), parseFloat(data.result.decl), sep/2.0);
+            getDeepSky(parseFloat(data.result.ra), parseFloat(data.result.decl), sep/2.0);
+            getPlanets(parseFloat(data.result.ra), parseFloat(data.result.decl), $("input#date").val()+" "+$("input#time").val(), sep/2.0);
+            makeURL();
+        },
+        error: function (responseData, theextStatus, errorThrown) {
+            console.log('POST failed.');
+        }
+    });
 }
 
 function setForm(){
 	$("#main-box #getspace").attr('id', 'getspace2');
 	$('#getspace2').submit(function() {
-  
-		var formData = "name=" + $("input#full_name").val()
-					 + "&place=" + $("input#place_name").val() 
-					 + "&lat=" + $("input#latitude").val() 
-					 + "&lon=" + $("input#longitude").val()
-					 + "&datetime=" + $("input#date").val() + " " + $("input#time").val() + ":00"
-					 + "&event=" + $("input#event_name").val();
-
-		console.log(formData);
-
-        $.ajax({
-		    type: 'POST',
-		    url: 'http://personal-space.herokuapp.com/api/create?'+formData,
-		    crossDomain: true,
-		    data: "",
-		    success: function(data, textStatus, jqXHR) {
-		        // console.log(data.result.ra, data.result.decl);
-		    	wwt.gotoRaDecZoom(parseFloat(data.result.ra), parseFloat(data.result.decl), 20, false);
-		    },
-		    error: function (responseData, theextStatus, errorThrown) {
-		        console.log('POST failed.');
-		    }
-		});
-
+        runForm();
 		return false;
     });
 }
 
-function mainContent(id) {
-	$("#main-box").html($("#"+id).html());
-	
+function setupPage() {
 	$(document).ready(function(){
-	   initializeWWT();
-	   setForm();
+        // Initialise WWT canvas
+        WWTSize();
+        initializeWWT();
+        
+        //Set up form and preload in URL is right
+        setForm();
+        preloadForm();
+
+        if (!getURLParam('datetime')) {
+            var myDate = new Date();
+            var prettyDate = myDate.getFullYear()+"-"+pad(myDate.getMonth()+1) + '-' + pad(myDate.getDate());
+            var prettyTime = pad(myDate.getHours())+":"+pad(myDate.getMinutes());
+            $("#date").val(prettyDate);
+            $("#time").val(prettyTime);
+            $("#date").datepicker({ dateFormat: 'yy-mm-dd' });
+            // $('#time').timepicker();
+        }
+
+        // Load accordions in top-left
+        $(".icon img").click(function () {
+            $(this).siblings(".acc").slideToggle();
+            $(".acc").not($(this).siblings(".acc")).slideUp();
+        }); 
+        loadAccordion('match-accordion');
+        loadAccordion('planets-accordion');
+        loadAccordion('deepsky-accordion');
+
+        if (getURLParam('trigger')==='true') {
+            triggerForm();
+        }
     });
 }
 
-$("#main-link").click(function() {
-  mainContent('homepage');
+function refreshWWT(ra, dec) {
+
+    wwt.goto(ra, dec, 20, false);
+    wwt.settings.set_locationLat( $("input#latitude").val() );
+    wwt.settings.set_locationLng( $("input#longitude").val() );
+    // wwt.settings.set_localHorizonMode(true); // NOT YET IMPLEMENTED IN WWT DOCS
+}
+
+$("#zoom_in").click(function() {
+  FovDec();
 });
 
-$("#about-link").click(function() {
-  mainContent('about');
-});
-
-$("#objects-link").click(function() {
-  mainContent('objects');
+$("#zoom_out").click(function() {
+  FovInc();
 });
 
 // !
@@ -61,6 +99,7 @@ var wwt;
 var bShowCrosshairs = true;
 var bShowUI = true;
 var bShowFigures = true;
+var bShowBoundaries = true;
 // This function initializes the wwt object and registers the wwtReady event
 // once the initialization is done the wwtReady event will be fired
 function initializeWWT() {
@@ -72,21 +111,70 @@ function initializeWWT() {
 }
 
 function FovInc() {
-    var newFov = 1.1 * wwt.get_fov();
+    var newFov = 2.0 * wwt.get_fov();
     if (newFov <= 60) {
-        wwt.gotoRaDecZoom(wwt.getRA(), wwt.getDec(), newFov, false);
+        wwt.goto(wwt.getRA()*15.0, wwt.getDec(), newFov, false);
     }
 }
 
 function FovDec() {
-    var newFov = wwt.get_fov() / 1.1;
+    var newFov = wwt.get_fov() / 2.0;
     if (wwt.get_fov() >= 0.00022910934437488727) {
-        wwt.gotoRaDecZoom(wwt.getRA(), wwt.getDec(), newFov, false);
+        wwt.goto(wwt.getRA()*15.0, wwt.getDec(), newFov, false);
     }
 }
 
-function wwtArrived() {
+// A function to create a circle, and return a reference to the circle
+var circleCount = 0;
+function createWWTCircle(fill, lineColor, fillColor, lineWidth, opacity, radius, skyRelative, ra, dec) {
+    var circle = wwt.createCircle(fill);
+    circleCount++;
+    circle.set_id("Circle" + circleCount.toString());
+    circle.set_lineColor(lineColor);
+    circle.set_fillColor(fillColor);
+    circle.set_lineWidth(lineWidth);
+    circle.set_opacity(opacity);
+    circle.set_radius(radius);
+    circle.set_skyRelative(skyRelative);
+    circle.setCenter(ra, dec);
+    wwt.addAnnotation(circle);
+    return true;
+}
+ // Simple function to clear all the annotations from the view
+ function clearAnnotations() {
+    wwt.clearAnnotations();
+}
 
+function createMatchCircle(ra, dec, sep) {
+    var circle = wwt.createCircle(true);
+    circleCount++;
+    circle.set_id("Circle" + circleCount.toString());
+    circle.set_lineColor('bbbbbb');
+    circle.set_fillColor('ffffff');
+    circle.set_lineWidth(1);
+    circle.set_opacity(0.15);
+    circle.set_radius(sep);
+    circle.set_skyRelative(true);
+    circle.setCenter(ra, dec);
+    return circle;
+}
+
+function createDeepSkyCircle(ra, dec) {
+    var circle = wwt.createCircle(true);
+    circleCount++;
+    circle.set_id("Circle" + circleCount.toString());
+    circle.set_lineColor('FFFF7D');
+    circle.set_fillColor('FFE214');
+    circle.set_lineWidth(1);
+    circle.set_opacity(0.5);
+    circle.set_radius(0.5);
+    circle.set_skyRelative(true);
+    circle.setCenter(ra, dec);
+    return circle;
+}
+
+function wwtArrived() {
+    // createWWTCircle(false, '531EBD', '531EBD', 3, 1.0, 10, true, (wwt.getRA()*15.0), wwt.getDec());
 }
 
 function toggleSetting(text) {
@@ -109,20 +197,40 @@ function toggleSetting(text) {
 function GotoConstellation(text) {       
     switch (text) {
         case 'Sagittarius':
-            wwt.gotoRaDecZoom(286.485, -27.5231666666667, 60, false);
+            wwt.goto(286.485, -27.5231666666667, 60, false);
             break;
          case 'Aquarius':
-            wwt.gotoRaDecZoom(334.345, -9.21083333333333, 60, false);
+            wwt.goto(334.345, -9.21083333333333, 60, false);
             break;
      }
+}
+
+function visitDeepSky(ra, dec) {
+    wwt.goto(parseFloat(ra), parseFloat(dec), 0.5, false);
 }
 
 // The wwtReady function is called by the WWT Web Control software
 // This function sets up the wwt object, and the initial defaults
 function wwtReady() {
+    wwt.hideUI(!bShowUI);
+
     wwt.settings.set_showCrosshairs(bShowCrosshairs);
     wwt.settings.set_showConstellationFigures(bShowFigures);
-    wwt.hideUI(!bShowUI);
-    wwt.settings.set_showConstellationBoundries(true);
-    wwt.gotoRaDecZoom(0, 90, 360, false);
+    wwt.settings.set_showConstellationBoundries(bShowBoundaries);
+    wwt.settings.set_constellationBoundryColor("555555");
+    wwt.settings.set_constellationSelectionColor("FFFFFF");
+    wwt.settings.set_constellationFigureColor("FFAE00");
+    
+    if (getURLParam('trigger')!='true') { wwt.goto(37.82983629365795, 89.26714517468302, 180, false); }
+}
+
+function WWTSize() {
+    var windowWidth = $(window).width();
+    var windowHeight = $(window).height() - $('.footer-container').height();
+    $('#WWTCanvasPre').css({'width':windowWidth ,'height':windowHeight });
+}
+
+//Trigger WWT resize on window resize
+window.onresize = function(event) {
+   WWTSize();
 }
