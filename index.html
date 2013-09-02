@@ -23,6 +23,7 @@
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         <script src="js/vendor/wwt.aspx"></script>
         <script src="js/vendor/jquery.geocomplete.min.js"></script>
+        <script src="js/vendor/jquery.circlemenu.js"></script>
 
     </head>
     <body>
@@ -38,46 +39,46 @@
             <div id="WWTCanvasPre" style="height:500px;960px;"></div>
             <div class="main wrapper clearfix">
 
-                <div id="people" class="icon">
-                    <img src="img/person.png" /><span class="badge" id="match_count"></span>
-                    <div id="match-accordion" class="acc">
-                        <h2>Find your space to see connections to other people.</h2>
-                    </div>
-                </div>
-                
-                <div id="planets" class="icon">
-                    <img src="img/planet.png"/><span class="badge" id="planet_count"></span>
-                    <div id="planets-accordion" class="acc">
-                        <h2>Planets in your personal space will appear here.</h2>
-                    </div>
-                </div>
+                <ul class="menu" id="people">
+                    <li class="centre"><a href="#" ><img src="img/person.png" id="person"/></a></li>
+                </ul>
 
-                <div id="deepsky" class="icon">
-                    <img src="img/galaxy.png"/><span class="badge" id="deepsky_count"></span>
-                    <div id="deepsky-accordion" class="acc">
-                        <h2>Deep sky objects in your personal space will appear here.</h2>
-                    </div>
-                </div>
+                <ul class="menu" id="deep">
+                    <li class="centre"><a href="#" ><img src="img/galaxy.png" id="galaxy"/></a></li>
+                </ul>
+
+                <span class="settings">
+                    <span class="label">Figures</span><input type="checkbox" id="figures" class="settings-check" name="figures" >
+                    <span class="label">Boundaries</span><input type="checkbox" id="boundaries" class="settings-check" name="boundaries" >
+                </span>
 
                 <section class="popup">
                     <form id="getspace">
 
-                        <label>Name:</label>
+                        <label>Name</label>
                         <input type="text" id="full_name" name="name" placeholder="Jane Doe" required>
 
-                        <label>Event Name:</label>
+                        <label>Event Name</label>
                         <input type="text" id="event_name" name="event" placeholder="e.g. Birthday" required>
 
-                        <label>Location:</label>
+                        <label id="place_name_label">Location &#8596;</label>
+                        <label id="lat_label">Lat &#8596;</label>
+                        <label id="lon_label">Lon &#8596;</label>
+                        <br/>
+
                         <input type="text" id="place_name" name="place" placeholder="Oxford, UK" required>
-                        <!-- Hidden Lat/Lon fields -->
                         <input type="text" data-geo="lat" id="latitude" name="lat" required>
                         <input type="text" data-geo="lng" id="longitude" name="lon" required>
+                        <br id="coords_break"/>
 
-                        <label>Event Date:</label>
+                        <div class="map_canvas_wrapper">
+                            <div class="map_canvas"></div>
+                        </div>
+
+                        <label>Event Date</label>
                         <input type="date" id="date" name="event_date" placeholder="2013-01-01" required>
 
-                        <label title="Time of event in local time at location">Local Time:</label>
+                        <label title="Time of event in local time at location">Local Time</label>
                         <input title="Time of event in local time at location" type="time" id="time" name="event_time" placeholder="14:00" required>
 
                         <input class="submit_button" type="submit" id="submit_button" value="Find Your Space" /> 
@@ -87,16 +88,173 @@
             </div> <!-- #main -->
         </div> <!-- #homepage-content -->
 
-        <div class="footer-container">          
-            <section>
-                <div id="zoom_in" class="zoom_button"><img src="img/zoom_in.png"/></div>
-                <div id="zoom_out" class="zoom_button"><img src="img/zoom_out.png"/></div>
-                <h2 id="pTitle">Personal Space</h2>
-                <p id="shortURL"></p>
+
+        <div class="header-container">          
+            <section id="background-container">
+                <section id="nav">
+                    <ul>
+                        <li id="about" >About</li>
+                        <li id="gallery" >Gallery</li>
+                        <li id="print" class="last" >Print</li>
+                    </ul>
+                </section>
+                <div id="about-content" class="background" >
+                    <div class="bgwrapper">
+                        <p>The stars remain stationery as the Earth rotates each day. As the Earth orbits the Sun, the stars we see each night slowly change.</p>
+                        <p>Personal Space takes a significant event (using its  date, time and location) to locate the region of the sky that was directly overhead at that exact moment.</p>
+                        <div class="thumb-half">
+                            <img src="img/examples/celestial-sphere.gif" class="half" />
+                        </div>
+                        <div class="thumb-half">
+                            <img src="img/examples/orion.jpg" class="half" />
+                        </div>
+                        <p>This site stores the information you provide in order to provide matches to other people's events and for no other purpose. We are not a commercial site. Personal Space relies on JavaScript and uses technology that is only available <a href="http://browsehappy.com/" target="_blank">through a modern web broswser</a>.</p>
+                    </div>
+                </div>
+                <div id="gallery-content" class="background" >
+                    <section id="subnav">
+                            <ul>
+                                <li id="historical" >Historical</li>
+                                <li id="political" class="inactive">Political</li>
+                                <li id="personal" class="last inactive" >Personal</li>
+                            </ul>
+                    </section>
+                    <div id="gallery-1-content" class="bg-gallery" >
+                        <div id="history-gallery" class="bgwrapper">
+                            <div class="gallery">
+                                
+                                <div class="thumb">
+                                    <a href="?name=Berlin%20Wall&place=Berlin&lat=52.5167&lon=13.3833&datetime=1989-11-09%2021:00:00&event=Fall%20of%20the%20Berlin%20Wall&trigger=true"><img src="img/examples/berlin-wall.jpg" /></a>
+                                    <span class="caption">Fall of the Berlin wall</span>
+                                </div>
+                                <div class="thumb">
+                                    <a href="?name=Boston%20Tea%20Party&place=Boston&lat=42.3417&lon=-70.9661&datetime=1773-12-16%2019:00:00&event=Boston%20Tea%20Party&trigger=true"><img src="img/examples/tea-party.jpg" /></a>
+                                    <span class="caption">Boston Tea Party</span>
+                                </div>
+                                <div class="thumb">
+                                    <a href="?name=Bastille%20Day&place=Paris&lat=48.853056&lon=2.369167&datetime=1789-07-14%2013:30:00&event=Storming%20of%20the%20Bastille&trigger=true"><img src="img/examples/bastille.jpg" /></a>
+                                    <span class="caption">Storming of the Bastille</span>
+                                </div>
+
+                                <div class="thumb">
+                                    <img src="http://placehold.it/100x80" />
+                                    <span class="caption">Coronation of Queen Elizabeth II</span>
+                                </div>
+                                <div class="thumb">
+                                    <img src="http://placehold.it/100x80" />
+                                    <span class="caption">Launch of Apollo 11</span>
+                                </div>
+                                <div class="thumb">
+                                    <img src="http://placehold.it/100x80" />
+                                    <span class="caption">Amundsen reaches the South Pole</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div id="gallery-2-content" class="bg-gallery" >
+                        <div id="political-gallery" class="bgwrapper">
+                            <div class="gallery">
+                                
+                                <div class="thumb">
+                                    <img src="http://placehold.it/100x80" />
+                                    <span class="caption">Inauguration of Barack Obama</span>
+                                </div>
+                                <div class="thumb">
+                                    <img src="http://placehold.it/100x80" />
+                                    <span class="caption">Release of Nelson Mandela</span>
+                                </div>
+                                <div class="thumb">
+                                    <img src="http://placehold.it/100x80" />
+                                    <span class="caption">The Good Friday agreement</span>
+                                </div>
+
+                                <div class="thumb">
+                                    <img src="http://placehold.it/100x80" />
+                                    <span class="caption"></span>
+                                </div>
+                                <div class="thumb">
+                                    <img src="http://placehold.it/100x80" />
+                                    <span class="caption"></span>
+                                </div>
+                                <div class="thumb">
+                                    <img src="http://placehold.it/100x80" />
+                                    <span class="caption"></span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                    <div id="gallery-3-content" class="bg-gallery" >
+                        <div id="personal-gallery" class="bgwrapper">
+                            <div class="gallery">
+                                
+                                <div class="thumb">
+                                    <img src="http://placehold.it/100x80" />
+                                    <span class="caption">Wedding, December 2006</span>
+                                </div>
+                                <div class="thumb">
+                                    <img src="http://placehold.it/100x80" />
+                                    <span class="caption">Birthday, April 1964</span>
+                                </div>
+                                <div class="thumb">
+                                    <img src="http://placehold.it/100x80" />
+                                    <span class="caption">Anniversary, November 2013</span>
+                                </div>
+
+                                <div class="thumb">
+                                    <img src="http://placehold.it/100x80" />
+                                    <span class="caption">Meeting, December 1998</span>
+                                </div>
+                                <div class="thumb">
+                                    <img src="http://placehold.it/100x80" />
+                                    <span class="caption">Wedding, July 2007</span>
+                                </div>
+                                <div class="thumb">
+                                    <img src="http://placehold.it/100x80" />
+                                    <span class="caption">Birthday, January 2003</span>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="print-content" class="background" >
+                    <div class="bgwrapper">
+                        <h3>5x7 format (simple)</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                        <img class="full" src="http://placehold.it/315x225" />
+                        <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.</p>
+                        <h3>A4 format (with details)</h3>
+                        <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
+                        <img class="full" src="http://placehold.it/315x225" />
+                    </div>
+                </div>
             </section>
             <aside>
                 <p>Supported by the <a href="http://www.gloria-project.eu">GLORIA Project</a></p>
             </aside>
+        </div>
+
+        <section>
+            <div id="zoom_in" class="zoom_button">+</div>
+            <div id="zoom_out" class="zoom_button">&minus;</div>
+        </section>
+
+        <div class="info-container">          
+            <section>
+                <p>Welcome to <b>Personal Space</b>.</p>
+                <p>The stars above your head are always moving, and they are different when seen from different parts of the world.</p>
+                <p>Think of a signficiant event in your life and enter the details of its date, time and location on the right. We'll use this to locate your <b>Personal Space</b> - the region of the sky that was directly overhead at that exact moment.</p>
+                <button id="info-okay">Okay</button>
+            </section>
+        </div>      
+
+        <div class="footer-container">          
+            <section>
+                <img id="pTitle" class="logo" src="img/personal-space-logo.png" alt="Personal Space" />
+                <p id="shortURL"></p>
+            </section>
         </div>
 
         <script src="js/functions.js"></script>
@@ -113,9 +271,37 @@
             $(document).ready(function(){
                 setupPage();
 
+                var thisURL = "https://dl.dropboxusercontent.com/u/2068615/GLORIADev/personal-space/index.html";
+
+                $(".gallery .thumb a").each(function() {
+                   $(this).attr("href", thisURL+ $(this).attr("href"));
+                });
+
+                $("#WWTCanvasPre").on("mousemove", function(e){
+                    e.preventDefault();
+                    e.stopPropagation();
+                });
+
                 $("#place_name").geocomplete({
                         details: "#getspace",
                         detailsAttribute: "data-geo",
+                        map: ".map_canvas",
+                        markerOptions: {
+                            draggable: true
+                        }
+                    }).bind("geocode:dragged", function(event, latLng){
+                      $("input[name=lat]").val(latLng.lat());
+                      $("input[name=lon]").val(latLng.lng());
+                    }).bind("geocode:result", function(event, latLng){
+                      $("#map_canvas_wrapper").focus();
+                      $(".map_canvas_wrapper").show();
+                      $("#place_name_label").hide();
+                      $("#place_name").hide();  
+                      $("#latitude").show();
+                      $("#longitude").show();
+                      $("#lat_label").show();
+                      $("#lon_label").show();  
+                      $("#coords_break").show();
                     }).bind("geocode:error", function(event, result){
                         console.log("Geocoding error:");
                         console.log(result);

@@ -20,11 +20,10 @@ function runForm() {
             // window.decl = data.result.decl;
             var sep = 20.0;
             refreshWWT(parseFloat(data.result.ra), parseFloat(data.result.decl));
-            closeAccordions();
             createWWTCircle(false, '531EBD', '531EBD', 3, 1.0, sep/2.0, true, parseFloat(data.result.ra), parseFloat(data.result.decl));
             findMatches(parseFloat(data.result.ra), parseFloat(data.result.decl), sep/2.0);
             getDeepSky(parseFloat(data.result.ra), parseFloat(data.result.decl), sep/2.0);
-            getPlanets(parseFloat(data.result.ra), parseFloat(data.result.decl), $("input#date").val()+" "+$("input#time").val(), sep/2.0);
+            // getPlanets(parseFloat(data.result.ra), parseFloat(data.result.decl), $("input#date").val()+" "+$("input#time").val(), sep/2.0);
             makeURL();
         },
         error: function (responseData, theextStatus, errorThrown) {
@@ -61,15 +60,6 @@ function setupPage() {
             // $('#time').timepicker();
         }
 
-        // Load accordions in top-left
-        $(".icon img").click(function () {
-            $(this).siblings(".acc").slideToggle();
-            $(".acc").not($(this).siblings(".acc")).slideUp();
-        }); 
-        loadAccordion('match-accordion');
-        loadAccordion('planets-accordion');
-        loadAccordion('deepsky-accordion');
-
         if (getURLParam('trigger')==='true') {
             triggerForm();
         }
@@ -78,7 +68,7 @@ function setupPage() {
 
 function refreshWWT(ra, dec) {
 
-    wwt.goto(ra, dec, 20, false);
+    wwt.goto(ra, dec, 40, false);
     wwt.settings.set_locationLat( $("input#latitude").val() );
     wwt.settings.set_locationLng( $("input#longitude").val() );
     // wwt.settings.set_localHorizonMode(true); // NOT YET IMPLEMENTED IN WWT DOCS
@@ -92,14 +82,151 @@ $("#zoom_out").click(function() {
   FovInc();
 });
 
+$("#info-okay").click(function() {
+  $(".info-container").hide();
+});
+
+$("#about").click(function() {
+  if ($(this).hasClass("active")==true) {
+    $(this).removeClass("active");
+    $("section#nav li").removeClass("inactive");
+    $(".background").hide();
+  } else {
+    $(this).addClass("active");
+    $("section#nav li").not(this).removeClass("active");
+    
+    $(this).removeClass("inactive");
+    $("section#nav li").not(this).addClass("inactive");
+
+    $("#about-content").show();
+    $("#gallery-content").hide();
+    $("#print-content").hide();
+  }
+});
+
+$("#gallery").click(function() {
+  if ($(this).hasClass("active")==true) {
+    $(this).removeClass("active");
+    $("section#nav li").removeClass("inactive");
+    $(".background").hide();
+  } else {
+    $(this).addClass("active");
+    $("section#nav li").not(this).removeClass("active");
+    
+    $(this).removeClass("inactive");
+    $("section#nav li").not(this).addClass("inactive");
+
+    $("#about-content").hide();
+    $("#gallery-content").show();
+    $("#print-content").hide();
+  }
+});
+
+$("#print").click(function() {
+  if ($(this).hasClass("active")==true) {
+    $(this).removeClass("active");
+    $("section#nav li").removeClass("inactive");
+    $(".background").hide();
+  } else {
+    $(this).addClass("active");
+    $("section#nav li").not(this).removeClass("active");
+    
+    $(this).removeClass("inactive");
+    $("section#nav li").not(this).addClass("inactive");
+
+    $("#about-content").hide();
+    $("#gallery-content").hide();
+    $("#print-content").show();
+  }
+});
+
+$("#historical").click(function() {
+
+  $("#historical").removeClass("inactive");
+  $("#political").addClass("inactive");
+  $("#personal").addClass("inactive");
+
+  $("#gallery-1-content").show();
+  $("#gallery-2-content").hide();
+  $("#gallery-3-content").hide();
+});
+
+$("#political").click(function() {
+
+  $("#historical").addClass("inactive");
+  $("#political").removeClass("inactive");
+  $("#personal").addClass("inactive");
+
+  $("#gallery-1-content").hide();
+  $("#gallery-2-content").show();
+  $("#gallery-3-content").hide();
+});
+
+$("#personal").click(function() {
+
+  $("#historical").addClass("inactive");
+  $("#political").addClass("inactive");
+  $("#personal").removeClass("inactive");
+
+  $("#gallery-1-content").hide();
+  $("#gallery-2-content").hide();
+  $("#gallery-3-content").show();
+});
+
+$("#figures").click(function() {
+    toggleFigures();
+    $().toggle(this.checked);
+});
+
+$("#boundaries").click(function() {
+    toggleBoundaries();
+    $().toggle(this.checked);
+});
+
+$("#place_name_label").click(function() {
+    $("#place_name_label").hide();
+    $("#place_name").hide();
+
+    $("#latitude").css('display', 'inline-block');
+    $("#longitude").css('display', 'inline-block');
+    $("#lat_label").css('display', 'inline-block');
+    $("#lon_label").css('display', 'inline-block');
+
+    $("#coords_break").show();
+});
+
+$("#lat_label, #lon_label").click(function() {
+    $("#place_name_label").show();
+    $("#place_name").show();
+
+    $("#latitude").hide();
+    $("#longitude").hide();
+    $("#lat_label").hide();
+    $("#lon_label").hide();
+
+    $("#coords_break").hide();
+});
+
+$("#place_name, #latitude, #longitude, .map_canvas_wrapper, .map_canvas").focusin(function() {
+  $(".map_canvas_wrapper").not(":visible").fadeIn(500);
+});
+
+$("input").not("#place_name, #latitude, #longitude, .map_canvas_wrapper, .map_canvas").focusin(function() {
+    $(".map_canvas_wrapper").fadeOut(500);
+});
+
+$("#submit, #nav").click(function() {
+    $(".map_canvas_wrapper").hide();
+});
+
 // !
 // WWT Controls
 // !
 var wwt;
 var bShowCrosshairs = true;
 var bShowUI = true;
-var bShowFigures = true;
-var bShowBoundaries = true;
+var bShowFigures = false;
+var bShowBoundaries = false;
 // This function initializes the wwt object and registers the wwtReady event
 // once the initialization is done the wwtReady event will be fired
 function initializeWWT() {
@@ -191,6 +318,10 @@ function toggleSetting(text) {
             bShowFigures = !bShowFigures;
             wwt.settings.set_showConstellationFigures(bShowFigures);
             break;
+         case 'ShowBoundaries':
+            bShowBoundaries = !bShowBoundaries;
+            wwt.settings.set_showConstellationBoundries(bShowBoundaries);
+            break;
     }
 }
 
@@ -221,13 +352,23 @@ function wwtReady() {
     wwt.settings.set_constellationSelectionColor("FFFFFF");
     wwt.settings.set_constellationFigureColor("FFAE00");
     
-    if (getURLParam('trigger')!='true') { wwt.goto(37.82983629365795, 89.26714517468302, 180, false); }
+    if (getURLParam('trigger')!='true') { wwt.goto(37.82983629365795, 80.26714517468302, 10, false); }
 }
 
 function WWTSize() {
     var windowWidth = $(window).width();
     var windowHeight = $(window).height() - $('.footer-container').height();
     $('#WWTCanvasPre').css({'width':windowWidth ,'height':windowHeight });
+}
+
+function toggleFigures(){
+    bShowFigures = !bShowFigures;
+    wwt.settings.set_showConstellationFigures(bShowFigures);
+}
+
+function toggleBoundaries(){
+    bShowBoundaries = !bShowBoundaries;
+    wwt.settings.set_showConstellationBoundries(bShowBoundaries);  
 }
 
 //Trigger WWT resize on window resize
