@@ -551,6 +551,13 @@ input[type=submit] {
   display: none;
 }
 
+#disclaimer {
+  display: inline-block;
+  width: 160px;
+  font: 10px/14px Helvetica, Helvetica Neue, Arial;
+  text-align: justify;
+}
+
 #submit_button {
   margin-top: 30px;
   background: #000000;
@@ -1005,7 +1012,6 @@ span.settings {
 
 span.label {
   display: inline-block;
-  width: 70px;
   text-align: right;
 }
 

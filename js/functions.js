@@ -86,7 +86,8 @@ function findMatches(ra, decl, sep){
             $.each(obj.result, function(k, v){                                 
                 i+=1;
                 if (i<=10) {
-                    $("#people").append('<li id="'+i+'-matches'+'"><a href="#" alt="'+v.name+'" title="'+i+'">'+v.name.split(" ")[0]+'</a></li>');
+                    // console.log(v);
+                    $("#people").append('<li id="'+i+'-matches'+'"><a href="#" alt="'+v.name+'" title="'+v.interArea+'">'+v.name.split(" ")[0]+'</a></li>');
                     $("#people").append('<span class="details" id="'+i+'-details">'+v.event+'<br/>'+v.location+'</span>');
                     var circ = createMatchCircle(v.ra, v.decl, sep);
                     $("#"+i+'-matches').hover(
