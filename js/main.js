@@ -30,6 +30,8 @@ function runForm() {
             console.log('POST failed.');
         }
     });
+
+    updatePrintText();
 }
 
 function setForm(){
@@ -356,8 +358,13 @@ function wwtReady() {
 }
 
 function WWTSize() {
-    var windowWidth = $(window).width();
-    var windowHeight = $(window).height() - $('.footer-container').height();
+    if (isMedia("print")==true) {
+        var windowWidth = "650px";
+        var windowHeight = $(window).height() - $('.footer-container').height();
+    } else {
+        var windowWidth = $(window).width();
+        var windowHeight = $(window).height() - $('.footer-container').height();
+    }
     $('#WWTCanvasPre').css({'width':windowWidth ,'height':windowHeight });
 }
 

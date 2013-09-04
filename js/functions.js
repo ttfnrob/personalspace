@@ -67,6 +67,24 @@ function triggerForm() {
     $(".info-container").hide();
 }
 
+var isMedia = (function(){
+ 
+    var div;
+    
+    return function(query){
+        if (!div){
+            div = document.createElement("div");
+            div.id = "ncz1";
+            div.style.cssText = "position:absolute;top:-1000px";
+            document.body.insertBefore(div, document.body.firstChild);          
+        }
+    
+        div.innerHTML = "_<style media=\"" + query + "\"> #ncz1 { width: 1px; }</style>";
+        div.removeChild(div.firstChild);
+        return div.offsetWidth == 1;    
+    };
+})();
+
 //API calling functions
 function findMatches(ra, decl, sep){
     $.ajax({
@@ -85,9 +103,10 @@ function findMatches(ra, decl, sep){
             var i = 0;
             $.each(obj.result, function(k, v){                                 
                 i+=1;
+                console.log(v);
                 if (i<=10) {
                     // console.log(v);
-                    $("#people").append('<li id="'+i+'-matches'+'"><a href="#" alt="'+v.name+'" title="'+v.interArea+'">'+v.name.split(" ")[0]+'</a></li>');
+                    $("#people").append('<li id="'+i+'-matches'+'"><a href="#" alt="'+v.name+'" title="'+Math.round(v.interarea*100,0)+'%">'+v.name.split(" ")[0]+'</a></li>');
                     $("#people").append('<span class="details" id="'+i+'-details">'+v.event+'<br/>'+v.location+'</span>');
                     var circ = createMatchCircle(v.ra, v.decl, sep);
                     $("#"+i+'-matches').hover(
@@ -186,4 +205,15 @@ function getPlanets(ra, decl, datetim, sep){
             console.log('POST failed.');
         }
     });
+}
+
+function updatePrintText(){
+    var string = $("input#full_name").val();
+    string = string+" "+$("input#place_name").val();
+    string = string+" "+$("input#latitude").val();
+    string = string+" "+$("input#longitude").val();
+    string = string+" "+$("input#date").val();
+    string = string+" "+$("input#time").val();
+    string = string+" "+$("input#event_name").val();
+    $("#print-text").text(string);
 }

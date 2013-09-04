@@ -16,6 +16,8 @@
         <link rel="stylesheet" href="css/jquery.ui.timepicker.css">
         <link rel="stylesheet" href="js/vendor/vallenato/vallenato.css">
 
+        <link rel="stylesheet" href="css/print.css" type="text/css" media="print" />
+
         <script src="https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
         <script src="js/vendor/jquery-1.9.1.min.js"></script>
         <script src="js/vendor/jquery-ui-1.10.1.custom.min.js"></script>
@@ -81,7 +83,7 @@
                         <label title="Time of event in local time at location">Local Time</label>
                         <input title="Time of event in local time at location" type="time" id="time" name="event_time" placeholder="14:00" required>
 
-                        <label id="disclaimer">The data you submit may be shown to others on this site when macthes are found.</label>
+                        <label id="disclaimer">Submitted data may be displayed on this site when matches are found</label>
 
                         <input class="submit_button" type="submit" id="submit_button" value="Find Your Space" /> 
                     </form>
@@ -238,7 +240,7 @@
             </aside>
         </div>
 
-        <section>
+        <section class="zoom-container">
             <div id="zoom_in" class="zoom_button">+</div>
             <div id="zoom_out" class="zoom_button">&minus;</div>
         </section>
@@ -256,6 +258,13 @@
             <section>
                 <img id="pTitle" class="logo" src="img/personal-space-logo.png" alt="Personal Space" />
                 <p id="shortURL"></p>
+            </section>
+        </div>
+
+        <div class="print-info-container">          
+            <section>
+                <img id="pTitle" class="logo" src="img/personal-space-logo.png" alt="Personal Space" />
+                <p id="print-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est.</p>
             </section>
         </div>
 
