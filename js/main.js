@@ -70,6 +70,7 @@ function setupPage() {
 
 function refreshWWT(ra, dec) {
 
+    clearAnnotations();
     wwt.goto(ra, dec, 40, false);
     wwt.settings.set_locationLat( $("input#latitude").val() );
     wwt.settings.set_locationLng( $("input#longitude").val() );
