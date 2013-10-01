@@ -308,10 +308,10 @@
                       $(".map_canvas_wrapper").show();
                       $("#place_name_label").hide();
                       $("#place_name").hide();  
-                      $("#latitude").show();
-                      $("#longitude").show();
-                      $("#lat_label").show();
-                      $("#lon_label").show();  
+                      $("#latitude").css('display', 'inline-block');
+                      $("#longitude").css('display', 'inline-block');
+                      $("#lat_label").css('display', 'inline-block');
+                      $("#lon_label").css('display', 'inline-block'); 
                       $("#coords_break").show();
                     }).bind("geocode:error", function(event, result){
                         console.log("Geocoding error:");

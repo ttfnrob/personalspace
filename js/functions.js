@@ -124,12 +124,12 @@ function findMatches(ra, decl, sep){
                 }
             });
 
-            $('ul#people').circleMenu({
+            $('#people').circleMenu({
               item_diameter: 50,
               circle_radius: 150,
               angle: {start:210, end:330},
               delay: 500
-            });
+            }).circleMenu('init');
 
         },
         error: function (responseData, theextStatus, errorThrown) {
@@ -167,12 +167,12 @@ function getDeepSky(ra, decl, sep){
                 );
             });
 
-            $('ul#deep').circleMenu({
+            $('#deep').circleMenu({
               item_diameter: 50,
               circle_radius: 150    ,
               angle: {start:210, end:330},
               delay: 500
-            });
+            }).circleMenu('init');
 
         },
         error: function (responseData, theextStatus, errorThrown) {

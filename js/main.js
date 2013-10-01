@@ -218,7 +218,7 @@ $("input").not("#place_name, #latitude, #longitude, .map_canvas_wrapper, .map_ca
     $(".map_canvas_wrapper").fadeOut(500);
 });
 
-$("#submit, #nav").click(function() {
+$("#submit, #nav, #submit_button").click(function() {
     $(".map_canvas_wrapper").hide();
 });
 
