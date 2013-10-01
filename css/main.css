@@ -1051,11 +1051,10 @@ input[type="checkbox"] {
 }
 
 .map_canvas_wrapper {
-  display: none;
   position: absolute;
   width: 280px;
   height: 150px;
-  left: -305px;
+  left: 9999999999px;
   bottom: 190px;
   background: rgba( 210, 210, 210, 0.8);
   -webkit-border-radius: 3px;

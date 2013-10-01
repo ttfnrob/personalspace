@@ -22,6 +22,10 @@ function checkTimeVal() {
     }
 }
 
+function hideMap(){
+    $(".map_canvas_wrapper").css('left','-305px').hide();
+}
+
 function getReverseGeocodingData(lat, lng) {
     var latlng = new google.maps.LatLng(lat, lng);
     // This is making the Geocode request
