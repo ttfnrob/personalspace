@@ -210,6 +210,10 @@ $("#lat_label, #lon_label").click(function() {
     $("#coords_break").hide();
 });
 
+$("#latitude, #longitude").bind("keyup input paste", function() {
+    getReverseGeocodingData($("#latitude").val(), $("#longitude").val());
+});
+
 $("#place_name, #latitude, #longitude, .map_canvas_wrapper, .map_canvas").focusin(function() {
   $(".map_canvas_wrapper").not(":visible").fadeIn(500);
 });

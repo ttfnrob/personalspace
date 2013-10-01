@@ -22,6 +22,26 @@ function checkTimeVal() {
     }
 }
 
+function getReverseGeocodingData(lat, lng) {
+    var latlng = new google.maps.LatLng(lat, lng);
+    // This is making the Geocode request
+    var geocoder = new google.maps.Geocoder();
+    geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+        if (status !== google.maps.GeocoderStatus.OK) {
+            console.log(status);
+            $("#place_name").val("Unknown");
+            console.log("Unknown coords");
+        }
+        // This is checking to see if the Geoeode Status is OK before proceeding
+        if (status == google.maps.GeocoderStatus.OK) {
+            console.log(results);
+            var address = (results[0].formatted_address);
+            $("#place_name").val(address);
+            console.log("Updated coords: ", address);
+        }
+    });
+}
+
 function preloadForm() {
     if (getURLParam('name')) { $("input#full_name").val(getURLParam('name')); }
     if (getURLParam('place')) { $("input#place_name").val(getURLParam('place')); }
