@@ -126,21 +126,7 @@ $("#gallery").click(function() {
 });
 
 $("#print").click(function() {
-  if ($(this).hasClass("active")==true) {
-    $(this).removeClass("active");
-    $("section#nav li").removeClass("inactive");
-    $(".background").hide();
-  } else {
-    $(this).addClass("active");
-    $("section#nav li").not(this).removeClass("active");
-    
-    $(this).removeClass("inactive");
-    $("section#nav li").not(this).addClass("inactive");
-
-    $("#about-content").hide();
-    $("#gallery-content").hide();
-    $("#print-content").show();
-  }
+  window.print();
 });
 
 $("#historical").click(function() {
