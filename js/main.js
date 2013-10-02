@@ -20,7 +20,7 @@ function runForm() {
             // window.decl = data.result.decl;
             var sep = 20.0;
             refreshWWT(parseFloat(data.result.ra), parseFloat(data.result.decl));
-            createWWTCircle(false, '531EBD', '531EBD', 3, 1.0, sep/2.0, true, parseFloat(data.result.ra), parseFloat(data.result.decl));
+            createWWTCircle(false, '#531EBD', '#531EBD', 3, 1.0, sep/2.0, true, parseFloat(data.result.ra), parseFloat(data.result.decl));
             findMatches(parseFloat(data.result.ra), parseFloat(data.result.decl), sep/2.0);
             getDeepSky(parseFloat(data.result.ra), parseFloat(data.result.decl), sep/2.0);
             // getPlanets(parseFloat(data.result.ra), parseFloat(data.result.decl), $("input#date").val()+" "+$("input#time").val(), sep/2.0);
@@ -283,8 +283,8 @@ function createMatchCircle(ra, dec, sep) {
     var circle = wwt.createCircle(true);
     circleCount++;
     circle.set_id("Circle" + circleCount.toString());
-    circle.set_lineColor('bbbbbb');
-    circle.set_fillColor('ffffff');
+    circle.set_lineColor('#bbbbbb');
+    circle.set_fillColor('#ffffff');
     circle.set_lineWidth(1);
     circle.set_opacity(0.15);
     circle.set_radius(sep);
@@ -297,8 +297,8 @@ function createDeepSkyCircle(ra, dec) {
     var circle = wwt.createCircle(true);
     circleCount++;
     circle.set_id("Circle" + circleCount.toString());
-    circle.set_lineColor('FFFF7D');
-    circle.set_fillColor('FFE214');
+    circle.set_lineColor('#FFFF7D');
+    circle.set_fillColor('#FFE214');
     circle.set_lineWidth(1);
     circle.set_opacity(0.5);
     circle.set_radius(0.5);
@@ -355,9 +355,9 @@ function wwtReady() {
     wwt.settings.set_showCrosshairs(bShowCrosshairs);
     wwt.settings.set_showConstellationFigures(bShowFigures);
     wwt.settings.set_showConstellationBoundries(bShowBoundaries);
-    wwt.settings.set_constellationBoundryColor("555555");
-    wwt.settings.set_constellationSelectionColor("FFFFFF");
-    wwt.settings.set_constellationFigureColor("FFAE00");
+    wwt.settings.set_constellationBoundryColor("#555555");
+    wwt.settings.set_constellationSelectionColor("#FFFFFF");
+    wwt.settings.set_constellationFigureColor("#FFAE00");
     
     if (getURLParam('trigger')!='true') { wwt.goto(37.82983629365795, 80.26714517468302, 10, false); }
 }

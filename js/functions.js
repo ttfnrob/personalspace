@@ -32,16 +32,15 @@ function getReverseGeocodingData(lat, lng) {
     var geocoder = new google.maps.Geocoder();
     geocoder.geocode({ 'latLng': latlng }, function (results, status) {
         if (status !== google.maps.GeocoderStatus.OK) {
-            console.log(status);
             $("#place_name").val("Unknown");
-            console.log("Unknown coords");
+            // console.log("Unknown coords");
+            alert("Lat/long not recognised as a known location.");
         }
         // This is checking to see if the Geoeode Status is OK before proceeding
         if (status == google.maps.GeocoderStatus.OK) {
-            console.log(results);
             var address = (results[0].formatted_address);
             $("#place_name").val(address);
-            console.log("Updated coords: ", address);
+            // console.log("Updated coords: ", address);
         }
     });
 }
