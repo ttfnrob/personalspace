@@ -350,8 +350,8 @@ function wwtReady() {
 
 function WWTSize() {
     if (isMedia("print")==true) {
-        var windowWidth = "650px";
-        var windowHeight = $(window).height() - $('.footer-container').height();
+        var windowWidth = $(window).width() - 10;
+        var windowHeight = $(window).height() - $('.footer-container').height() - 10;
     } else {
         var windowWidth = $(window).width();
         var windowHeight = $(window).height() - $('.footer-container').height();

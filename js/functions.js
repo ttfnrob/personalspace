@@ -126,7 +126,6 @@ function findMatches(ra, decl, sep){
             var i = 0;
             $.each(obj.result, function(k, v){                                 
                 i+=1;
-                console.log(v);
                 if (i<=10) {
                     // console.log(v);
                     $("#people").append('<li id="'+i+'-matches'+'"><a href="#" alt="'+v.name+'" title="'+Math.round(v.interarea*100,0)+'%">'+v.name.split(" ")[0]+'</a></li>');
@@ -231,12 +230,11 @@ function getPlanets(ra, decl, datetim, sep){
 }
 
 function updatePrintText(){
-    var string = $("input#full_name").val();
-    string = string+" "+$("input#place_name").val();
-    string = string+" "+$("input#latitude").val();
-    string = string+" "+$("input#longitude").val();
-    string = string+" "+$("input#date").val();
-    string = string+" "+$("input#time").val();
-    string = string+" "+$("input#event_name").val();
-    $("#print-text").text(string);
+    var string1 = "<strong>"+$("input#event_name").val()+"</strong>";
+    string1 = string1+", "+$("input#date").val();
+    string1 = string1+", "+$("input#time").val();
+    string2 = $("input#place_name").val();
+    string2 = string2+" ("+parseFloat($("input#latitude").val()).toFixed(3);;
+    string2 = string2+", "+parseFloat($("input#longitude").val()).toFixed(3)+")";
+    $("#print-text").html(string1+"<br/>"+string2);
 }
