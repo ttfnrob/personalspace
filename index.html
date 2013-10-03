@@ -57,6 +57,8 @@
                 <section class="popup">
                     <form id="getspace">
 
+                        <input class="toggle_form" type="button" id="toggle_form" value="Hide Form" />
+
                         <label>Name</label>
                         <input type="text" id="full_name" name="name" placeholder="Jane Doe" required>
 
@@ -236,7 +238,7 @@
             <section>
                 <p>Welcome to <b>Personal Space</b>.</p>
                 <p>The stars above your head are always moving, and they are different when seen from different parts of the world.</p>
-                <p>Think of a signficiant event in your life and enter the details of its date, time and location on the right. We'll use this to locate your <b>Personal Space</b> - the region of the sky that was directly overhead at that exact moment.</p>
+                <p>Think of a significant event in your life and enter the details of its date, time and location on the right. We'll use this to locate your <b>Personal Space</b> - the region of the sky that was directly overhead at that exact moment.</p>
                 <button id="info-okay">Okay</button>
             </section>
         </div>      
@@ -278,6 +280,10 @@
                 $("#WWTCanvasPre").on("mousemove", function(e){
                     e.preventDefault();
                     e.stopPropagation();
+                });
+
+                $("#toggle_form").click( function(){
+                    toggleForm();
                 });
 
                 $("#place_name").geocomplete({

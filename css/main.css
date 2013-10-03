@@ -4,7 +4,7 @@
 
 html {
   height: 100%;
-  font-size: 1em;
+  font-size: 0.8em;
   line-height: 1.0;
 }
 
@@ -48,7 +48,7 @@ img {
 
 img.logo {
   width: 200px;
-  margin-top: 5px;
+  margin-top: 10px;
 }
 
 fieldset {
@@ -74,7 +74,7 @@ textarea {
    ========================================================================== */
 
 body {
-    font: 16px/26px Helvetica, Helvetica Neue, Arial;
+    font: 16px/20px Helvetica, Helvetica Neue, Arial;
     background: #000000;
 }
 
@@ -89,7 +89,6 @@ body {
    =================== */
 
 .header-container {
-  border-bottom: 10px solid #d2d2d2;
   position: absolute;
   top: 0px;
   left: 0px;
@@ -101,22 +100,22 @@ body {
  position: absolute;
  top: 50%;
  left: 50%;
- margin-left: -190px;
- margin-top: -190px;
--webkit-border-radius:460px;
- -moz-border-radius:460px;
- -o-border-radius:460px;
- -ms-border-radius:460px;
- border-radius:460px;
- padding: 70px 40px;
- width: 300px; 
- height: 240px;
+ margin-left: -165px;
+ margin-top: -165px;
+-webkit-border-radius:320;
+ -moz-border-radius:320px;
+ -o-border-radius:320px;
+ -ms-border-radius:320px;
+ border-radius:320px;
+ padding: 50px 25px;
+ width: 270px; 
+ height: 220px;
  background-color: #ffffff;
  color: #000000;
  z-index: 100;
  text-align: center;
- font-size: 14px;
- line-height: 16px;
+ font-size: 12px;
+ line-height: 14px;
 }
 
 .footer-container {
@@ -130,7 +129,7 @@ body {
 
 .footer-container,
 .main aside {
-    border-top: 10px solid #d2d2d2;
+
 }
 
 .footer-container aside {
@@ -140,7 +139,7 @@ body {
    bottom: 0px;
    width: 30%;
    text-align: right;
-   font-size: 10px;
+   font-size: 9px;
 }
 
 .header-container aside {
@@ -155,7 +154,6 @@ body {
 
 .header-container aside {
    right: 10px;
-   font-size: 0.8em;
    color: #000000;
 }
 
@@ -198,7 +196,7 @@ body {
    right: 5px;
    width: 100px;
    text-align: right;
-   font-size: 20px;
+   font-size: 10px;
 }
 
 .print-info-container {
@@ -216,6 +214,7 @@ body {
 nav ul {
     margin: 0;
     padding: 0;
+    text-transform: uppercase;
 }
 
 nav a {
@@ -514,17 +513,17 @@ nav a:hover {
 /*FORM CSS*/
 
 form {
-  margin: 5px auto;
+  margin: 0px auto;
 }
 
 input {
   /*font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;*/
   border:1px solid #ccc;
-  font-size:1.0em;
+  font-size:12px;
   width:150px;
   /*min-height:30px;*/
   display:block;
-  margin-bottom:8px;
+  margin-bottom:5px;
   margin-top:2px;
   outline: none;
 
@@ -535,7 +534,7 @@ input {
   border-radius:3px;
 }
 
-input[type=submit] {
+input[type=submit], input[type=button] {
   background:none;
   padding:5px;
 }
@@ -558,26 +557,28 @@ input[type=submit] {
 
 #disclaimer {
   display: inline-block;
-  width: 160px;
-  font: 10px/14px Helvetica, Helvetica Neue, Arial;
+  width: 150px;
+  font: 10px/12px Helvetica, Helvetica Neue, Arial;
   text-align: justify;
 }
 
-#submit_button {
-  margin-top: 30px;
+#submit_button, #toggle_form {
   background: #000000;
   color: #ffffff;
 }
 
-#submit_button:hover {
-  margin-top: 30px;
+#submit_button:hover, #toggle_form:hover {
   background: #6023db;
   color: #ffffff;
 }
 
+#submit_button {
+  margin-top: 25px;
+}
+
 .main section.popup {
   clear: both;
-  padding: 10px 20px;
+  padding: 8px 16px;
   background: rgba( 210, 210, 210, 0.8);
   color: #efefef;
   position: absolute;
@@ -589,17 +590,18 @@ input[type=submit] {
   -o-border-radius:3px;
   -ms-border-radius:3px;
   border-radius:3px;
+  overflow-y: hidden;
 }
 
 .main section.popup label {
-  font-size: 0.8em;
+  font-size: 12px;
   text-transform: uppercase;
   color: #efefef;
 }
 
 div.zoom_button {
   position: absolute;
-  top: 80px;
+  top: 60px;
   right: 20px;
   width: 20px;
   height: 20px;
@@ -714,7 +716,7 @@ section#nav ul, section#subnav ul {
   width:330px;
   position:relative;
   display:block;
-  font-size:1.0em;
+  font-size:0.8em;
   margin:0;
   padding:0;
   z-index: 100;
@@ -733,7 +735,7 @@ section#nav li, section#subnav li {
   background-color: #000000;
   text-decoration: none;
   padding: 2px;
-  font-size: 1.0em;
+  font-size: 0.8em;
   font-weight: normal;
   width: 100px;
   -webkit-border-radius: 3px;
@@ -821,7 +823,7 @@ section#background-container {
 .bgwrapper p {
   margin: 0;
   padding: 0;
-  font-size: 0.8em;
+  font-size: 12px;
   line-height: 1.5em;
   padding: 3px 0;
 }
@@ -887,7 +889,7 @@ section#background-container {
   background-color: #000000;
   text-decoration: none;
   padding: 5px;
-  font-size: 1.0em;
+  font-size: 12px;
   font-weight: normal;
   width: 100px;
   -webkit-border-radius: 3px;
@@ -900,7 +902,7 @@ section#background-container {
 
 ul.menu {
   position: absolute;
-  bottom: 65px;
+  bottom: 55px;
   z-index: 1000;
   list-style: none;
   margin: 0px;
@@ -990,14 +992,14 @@ ul.circleMenu-open span.details {
 
 #deep {
   position: absolute;
-  bottom: 65px;
+  bottom: 60px;
   left: 320px;
   z-index: 1000;
 }
 
 #people {
   position: absolute;
-  bottom: 65px;
+  bottom: 60px;
   left: 240px;
   z-index: 1000;
 }
@@ -1012,7 +1014,7 @@ span.settings {
   right: 250px;
   width: 100px;
   z-index: 1000;
-  font-size: 0.8em;
+  font-size: 10px;
 }
 
 span.label {

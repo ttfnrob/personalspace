@@ -45,6 +45,23 @@ function getReverseGeocodingData(lat, lng) {
     });
 }
 
+function toggleForm(){
+    
+    if ((typeof oldH === 'undefined') && (typeof newH === 'undefined')) {
+        newH = 30;
+        oldH = $(".popup").height();
+        msg = "Show Form";
+    } else {
+        newH = oldH;
+        oldH = $(".popup").height();
+        msg = "Hide Form";
+    }
+
+    $(".popup").animate({height: newH}, 500, function(){
+        $("#toggle_form").attr("value",msg);
+    });
+}
+
 function preloadForm() {
     if (getURLParam('name')) { $("input#full_name").val(getURLParam('name')); }
     if (getURLParam('place')) { $("input#place_name").val(getURLParam('place')); }
