@@ -201,7 +201,7 @@ function getDeepSky(ra, decl, sep){
                 i+=1;
                 $("#deep").append('<li id="'+i+'-deepsky'+'"><a href="#" alt="'+v.name+'" title="'+v.name+'">'+v.name+'</a></li>');
                 $("#deep").append('<span class="details" id="'+i+'-deep-details">'+v.name+'<br/>'+v.class+'</span>');
-                console.log(v);
+                // console.log(v);
                 var circ = createDeepSkyCircle(v.ra, v.decl);
                 $("#"+i+'-deepsky').hover(
                   function () {
