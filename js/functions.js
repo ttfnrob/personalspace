@@ -160,6 +160,11 @@ function findMatches(ra, decl, sep){
                         $("#"+x+'-details').hide();
                       }
                     );
+                    $("#"+i+'-matches').click(
+                      function () {
+                        wwt.goto(v.ra, v.decl, 40, false);
+                      }
+                    );
                 }
             });
 
@@ -202,6 +207,11 @@ function getDeepSky(ra, decl, sep){
                   },
                   function () {
                     wwt.removeAnnotation(circ);
+                  }
+                );
+                $("#"+i+'-deepsky').click(
+                  function () {
+                    wwt.goto(v.ra, v.decl, 1, false);
                   }
                 );
             });
