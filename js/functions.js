@@ -200,13 +200,19 @@ function getDeepSky(ra, decl, sep){
             $.each(obj.result, function(k, v){                                 
                 i+=1;
                 $("#deep").append('<li id="'+i+'-deepsky'+'"><a href="#" alt="'+v.name+'" title="'+v.name+'">'+v.name+'</a></li>');
+                $("#deep").append('<span class="details" id="'+i+'-deep-details">'+v.name+'<br/>'+v.class+'</span>');
+                console.log(v);
                 var circ = createDeepSkyCircle(v.ra, v.decl);
                 $("#"+i+'-deepsky').hover(
                   function () {
+                    x = $(this).attr('id').split("-")[0];
                     wwt.addAnnotation(circ);
+                    $("#"+x+'-deep-details').show();
                   },
                   function () {
+                    x = $(this).attr('id').split("-")[0];
                     wwt.removeAnnotation(circ);
+                    $("#"+x+'-deep-details').hide();
                   }
                 );
                 $("#"+i+'-deepsky').click(
