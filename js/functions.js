@@ -45,6 +45,38 @@ function getReverseGeocodingData(lat, lng) {
     });
 }
 
+function createDetails(name){
+    var lookUPURL = "http://www.strudel.org.uk/lookUP/json/?name="+name+"&callback=?";
+    
+    $.ajax({
+       type: 'GET',
+        url: lookUPURL,
+        async: false,
+        jsonpCallback: 'jsonCallback',
+        contentType: "application/json",
+        dataType: 'jsonp',
+        success: function(json) {
+            console.log("Success",json);
+            var newbox =    '<div class="details-container" id="details-'+name+'"> \
+                                <section> \
+                                    <h3>'+json.target.name+'</h3> \
+                                    <img src="'+json.image.src+'" /> \
+                                    <p>'+json.category.avmdesc+' &middot; <a href="http://en.wikipedia.org/wiki/Special:Search/'+json.target.name+'">Search Wikipedia</a></p> \
+                                    <button>Close</button> \
+                                </section> \
+                            </div>';
+            $("#details-tree").append(newbox);
+            $("#details-"+name).draggable();
+            $("#details-"+name+" button").on('click', function(){
+                $("#details-"+name).remove();
+            });
+        },
+        error: function(e) {
+           console.log("lookUP failed",e.message);
+        }
+    });
+}
+
 function toggleForm(){
     
     if ((typeof oldH === 'undefined') && (typeof newH === 'undefined')) {
@@ -217,6 +249,7 @@ function getDeepSky(ra, decl, sep){
                 );
                 $("#"+i+'-deepsky').click(
                   function () {
+                    createDetails(v.name);
                     wwt.goto(v.ra, v.decl, 1, false);
                   }
                 );
