@@ -69,7 +69,7 @@ div.page    {
 }
 
 /*Remove Element*/
-.popup, .main, .header-container, .info-container, .footer-container, .zoom-container {display:none;}
+.popup, .main, .header-container, .info-container, .footer-container, .zoom-container, .details-container {display:none;}
 
 /*Footer*/
 /*#footer {margin-top:10px;}*/

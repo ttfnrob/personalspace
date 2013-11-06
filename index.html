@@ -25,6 +25,7 @@
         <script src="js/vendor/modernizr-2.6.2-respond-1.1.0.min.js"></script>
         <script src="js/vendor/wwt.aspx"></script>
         <script src="js/vendor/jquery.geocomplete.min.js"></script>
+        <script src="js/vendor/jquery.slides.min.js"></script>
         <script src="js/vendor/jquery.circlemenu.js"></script>
 
     </head>
@@ -115,6 +116,7 @@
                             <img src="img/boyandballoon.jpg" class="half" />
                         </div>
                         <p>This site stores the information you provide in order to provide matches to other people's events and for no other purpose. We are not a commercial site. Personal Space relies on JavaScript and uses technology that is only available <a href="http://browsehappy.com/" target="_blank">through a modern web broswser</a>.</p>
+                        <p class="ack">GLORIA is a project funded by the European Union Seventh Framework Programme (FP7/2007-2012) under grant agreement number 283783</p>
                     </div>
                 </div>
                 <div id="gallery-content" class="background" >
@@ -128,10 +130,9 @@
                     <div id="gallery-1-content" class="bg-gallery" >
                         <div id="history-gallery" class="bgwrapper">
                             <div class="gallery">
-                                
                                 <div class="thumb">
                                     <a href="?name=Boston%20Tea%20Party&place=Boston&lat=42.3417&lon=-70.9661&datetime=1773-12-16%2019:00:00&event=Boston%20Tea%20Party&trigger=true"><img src="img/examples/tea-party.jpg" /></a>
-                                    <span class="caption">Boston Tea Party</span>
+                                    <span class="caption">The Boston Tea Party<br/></span>
                                 </div>
                                 <div class="thumb">
                                     <a href="?name=Bastille%20Day&place=Paris&lat=48.853056&lon=2.369167&datetime=1789-07-14%2013:30:00&event=Storming%20of%20the%20Bastille&trigger=true"><img src="img/examples/bastille.jpg" /></a>
@@ -143,7 +144,7 @@
                                 </div>
                                 <div class="thumb">
                                     <a href="?name=Ghandi%27s%20Birth&place=Porbandar%2C%20India&lat=21.64111&lon=69.60056&datetime=1869-10-02%2007:11:00&event=Ghandi%27s%20Birth&trigger=true"><img src="img/examples/ghandi.jpg" /></a>
-                                    <span class="caption">Ghandi's Birth</span>
+                                    <span class="caption">Birth of Mahatma Ghandi</span>
                                 </div>
                                 <div class="thumb">
                                     <a href="?name=Sinking%20of%20the%20Titanic&place=Atlantic+Ocean&lat=41.46&lon=-50.14&datetime=1912-04-14%2023:40:00&event=Sinking%20of%20the%20Titanic&trigger=true"><img src="img/examples/titanic.jpg" /></a>
@@ -160,7 +161,6 @@
                     <div id="gallery-2-content" class="bg-gallery" >
                         <div id="political-gallery" class="bgwrapper">
                             <div class="gallery">
-                                
                                 <div class="thumb">
                                     <a href="?name=Inauguration+of+Barack+Obama&place=Southeast+Drive%2C+Washington%2C+DC+20016%2C+USA&lat=38.88972&lon=-77.00889&datetime=2009-01-20%2012:00:00&event=Inauguration+of+Barack+Obama&trigger=true"><img src="img/examples/obama.jpg" /></a>
                                     <span class="caption">Inauguration of Barack Obama</span>
@@ -183,7 +183,7 @@
                                 </div>
                                 <div class="thumb">
                                     <a href="?name=JFK%20Assassination&place=Dallas%2C%20Texas&lat=32.71278&lon=-96.80833&datetime=1963-11-22%2008:32:00&event=JFK%20Assassination&trigger=true"><img src="img/examples/jfk.jpg" /></a>
-                                    <span class="caption">JFK Assassination</span>
+                                    <span class="caption">Assassination of JFK</span>
                                 </div>
 
                             </div>
@@ -225,19 +225,20 @@
                 </div>
             </section>
             <aside>
-                <p>Supported by the <a href="http://www.gloria-project.eu">GLORIA Project</a></p>
+                <p><a href="https://docs.google.com/forms/d/1SuF_fPanD5M_RzvkmfQ-fe23YrarYXY-b-zGUc1q_9k/viewform">Help us improve</a> &middot; Supported by the <a href="http://ec.europa.eu/index_en.htm">European Commission</a></p>
             </aside>
         </div>
 
         <section class="zoom-container">
             <div id="zoom_in" class="zoom_button">+</div>
             <div id="zoom_out" class="zoom_button">&minus;</div>
+            <div id="gloria-logo" class="logo"><a href="http://www.gloria-project.eu"><img title="Part of the GLORIA Project" src="img/logo-gloria.png" /></a></div>
         </section>
 
         <div class="info-container">          
             <section>
                 <p>Welcome to <b>Personal Space</b>.</p>
-                <p>The stars above your head are always moving, and they are different when seen from different parts of the world.</p>
+                <p>The stars remain stationery as the Earth rotates each day. As the Earth orbits the Sun, the stars we see each night slowly change.</p>
                 <p>Think of a significant event in your life and enter the details of its date, time and location on the right. We'll use this to locate your <b>Personal Space</b> - the region of the sky that was directly overhead at that exact moment.</p>
                 <button id="info-okay">Okay</button>
             </section>

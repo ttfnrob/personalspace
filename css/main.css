@@ -150,6 +150,7 @@ body {
    width: 100%;
    text-align: right;
    font-size: 10px;
+   padding-bottom: 3px;
 }
 
 .header-container aside {
@@ -630,8 +631,8 @@ input[type=submit], input[type=button] {
 
 div.zoom_button {
   position: absolute;
-  top: 60px;
-  right: 20px;
+  bottom: 12px;
+  right: 320px;
   width: 20px;
   height: 20px;
   background: rgba( 202, 202, 202, 1.0);
@@ -647,6 +648,7 @@ div.zoom_button {
   line-height: 20px;
   font-size: 18px;
   font-weight: bold;
+  z-index: 999;
 }
 
 div.zoom_button:hover {
@@ -659,7 +661,21 @@ div.zoom_button img {
 }
 
 div#zoom_out  {
-  right: 75px;
+  right: 375px;
+}
+
+div.logo {
+  position: absolute;
+  top: 45px;
+  right: 3px;
+  height: 75px;
+  color: #222222;
+  padding: 10px;
+  text-align: center;
+}
+
+div#gloria-logo img {
+  height: 100%;
 }
 
 div.icon {
@@ -1041,7 +1057,7 @@ ul.circleMenu-open span.details {
 span.settings {
   position: absolute;
   bottom: 10px;
-  right: 250px;
+  right: 200px;
   width: 100px;
   z-index: 1000;
   font-size: 12px;
@@ -1122,4 +1138,9 @@ input[type="checkbox"] {
   top: 50%;
   margin-top: -34px;
 }
+
+p.ack {
+  font-size: 10px;
+  line-height: 12px;
+  color: #666;
 }

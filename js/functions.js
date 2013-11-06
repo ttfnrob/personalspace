@@ -47,7 +47,30 @@ function getReverseGeocodingData(lat, lng) {
 
 function createDetails(name){
     var lookUPURL = "http://www.strudel.org.uk/lookUP/json/?name="+name+"&callback=?";
-    
+    var flickrURL = "http://personal-space.herokuapp.com/api/flickrbyname?object="+name;
+    var images = "";
+
+    $("#details-tree").empty();
+    //yeeha
+
+    // $.ajax({
+    //    type: 'GET',
+    //     url: flickrURL,
+    //     async: false,
+    //     contentType: "application/json",
+    //     dataType: 'json',
+    //     success: function(json) {
+    //         console.log(json);
+    //         for (var i=0; i<=json.img_urls.length; i++) {
+    //             images=images+'<img src="'+json.img_urls[i][0]+'" />';
+    //             console.log(images);
+    //         }
+    //     },
+    //     error: function(e) {
+    //        console.log("Flickr search failed",e.message);
+    //     }
+    // });
+
     $.ajax({
        type: 'GET',
         url: lookUPURL,
@@ -61,6 +84,10 @@ function createDetails(name){
                                 <section> \
                                     <h3>'+json.target.name+'</h3> \
                                     <img src="'+json.image.src+'" /> \
+                                    <!-- <div id="slides-'+name+'"> \
+                                        <img src="'+json.image.src+'" /> \
+                                        // '+images+' \
+                                    </div> --> \
                                     <p>'+json.category.avmdesc+' &middot; <a href="http://en.wikipedia.org/wiki/Special:Search/'+json.target.name+'">Search Wikipedia</a></p> \
                                     <button>Close</button> \
                                 </section> \
@@ -70,11 +97,16 @@ function createDetails(name){
             $("#details-"+name+" button").on('click', function(){
                 $("#details-"+name).remove();
             });
+            // $("#slides-"+name).slidesjs({
+            //     width: 150,
+            //     height: 150
+            // });
         },
         error: function(e) {
            console.log("lookUP failed",e.message);
         }
     });
+
 }
 
 function toggleForm(){
