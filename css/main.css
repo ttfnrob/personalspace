@@ -78,6 +78,8 @@ body {
     background: #000000;
 }
 
+.ui-menu .ui-menu-item { font-size: 10px;}
+
 .wrapper {
     width: 90%;
     margin: 0 5%;

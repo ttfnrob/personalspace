@@ -28,7 +28,21 @@
         <script src="js/vendor/jquery.slides.min.js"></script>
         <script src="js/vendor/jquery.circlemenu.js"></script>
 
-    </head>
+<!--
+        <link media="all" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/smoothness/jquery-ui.css" rel="stylesheet"/>
+-->    
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/jquery-ui.min.js"></script>
+    <script type="text/javascript">
+        $(function() {
+            $('#event_name').autocomplete({
+                source: ["Birthday", "Wedding"],
+                minLength: 0
+            }).focus(function(){            
+                $(this).trigger('keydown.autocomplete');
+            });
+        });
+    </script>    </head>
     <body>
         <!--[if lt IE 7]>
             <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
@@ -64,8 +78,11 @@
                         <input type="text" id="full_name" name="name" placeholder="Jane Doe" required>
 
                         <label>Event Name</label>
-                        <input type="text" id="event_name" name="event" placeholder="e.g. Birthday" required>
-
+                        <input type="text" list="event_suggestions" id="event_name" name="event" placeholder="e.g. Birthday" required>
+                        <datalist id="event_suggestions">
+                          <option value="Birthday">
+                          <option value="Wedding">
+                        </datalist> 
                         <label id="place_name_label">Location &#8596;</label>
                         <label id="lat_label">Lat &#8596;</label>
                         <label id="lon_label">Lon &#8596;</label>
