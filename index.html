@@ -366,8 +366,9 @@
             $(document).ready(function(){
                 setupPage();
 
-                var thisURL = "http://127.0.0.1/~toast/personalspace/"; /*"http://personal-space.eu";*/
-
+                // var thisURL = "http://127.0.0.1/~toast/personalspace/";
+                var thisURL = "http://personal-space.eu";
+                
                 $(".gallery .thumb a").each(function() {
                    $(this).attr("href", thisURL+ $(this).attr("href"));
                 });
