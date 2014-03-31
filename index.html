@@ -28,6 +28,49 @@
         <script src="js/vendor/jquery.slides.min.js"></script>
         <script src="js/vendor/jquery.circlemenu.js"></script>
 
+<style type="text/css">
+    .tooltip
+    {
+      text-decoration:none;
+      position:relative;
+    }
+
+
+    .tooltip span
+    {
+      display:none;
+      -moz-border-radius:6px;
+      -webkit-border-radius:6px;
+      border-radius:6px;
+      color:black;
+      background:white; 
+    }
+
+
+    .tooltip span img
+    {
+      float:left;
+      margin:0px 8px 8px 0;
+    }
+
+
+    .tooltip:hover span
+    {
+      display:block;
+      position:absolute;<br>  top:0;<br>  left:0;
+      z-index:1000;
+      width:auto;
+      max-width:320px;
+      min-height:128px;
+      border:1px solid black;
+      margin-top:12px;
+      margin-left:32px;
+      overflow:hidden;
+      padding:8px;
+    }
+    </style>
+
+
 <!--
         <link media="all" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/smoothness/jquery-ui.css" rel="stylesheet"/>    
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.3/jquery.min.js"></script>
@@ -323,7 +366,7 @@
             $(document).ready(function(){
                 setupPage();
 
-                var thisURL = "http://personal-space.eu";
+                var thisURL = "http://127.0.0.1/~toast/personalspace/"; /*"http://personal-space.eu";*/
 
                 $(".gallery .thumb a").each(function() {
                    $(this).attr("href", thisURL+ $(this).attr("href"));

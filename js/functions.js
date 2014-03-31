@@ -70,7 +70,7 @@ function createDetails(name){
     //        console.log("Flickr search failed",e.message);
     //     }
     // });
-
+    name = name.replace(" ", "_")
     $.ajax({
        type: 'GET',
         url: lookUPURL,
