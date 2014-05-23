@@ -18,7 +18,7 @@ function runForm() {
             // console.log(parseFloat(data.result.ra), parseFloat(data.result.decl));
             // window.ra = data.result.ra;
             // window.decl = data.result.decl;
-            var sep = 20.0;
+            var sep = 15.0;
             refreshWWT(parseFloat(data.result.ra), parseFloat(data.result.decl));
             createWWTCircle(false, '#531EBD', '#531EBD', 3, 1.0, sep/2.0, true, parseFloat(data.result.ra), parseFloat(data.result.decl));
             findMatches(parseFloat(data.result.ra), parseFloat(data.result.decl), sep/2.0);
@@ -104,6 +104,26 @@ $("#about").click(function() {
     $("#about-content").show();
     $("#gallery-content").hide();
     $("#print-content").hide();
+    $("#share-content").hide();
+  }
+});
+
+$("#share").click(function() {
+  if ($(this).hasClass("active")==true) {
+    $(this).removeClass("active");
+    $("section#nav li").removeClass("inactive");
+    $(".background").hide();
+  } else {
+    $(this).addClass("active");
+    $("section#nav li").not(this).removeClass("active");
+
+    $(this).removeClass("inactive");
+    $("section#nav li").not(this).addClass("inactive");
+
+    $("#share-content").show();
+    $("#about-content").hide();
+    $("#gallery-content").hide();
+    $("#print-content").hide();
   }
 });
 
@@ -122,6 +142,7 @@ $("#gallery").click(function() {
     $("#about-content").hide();
     $("#gallery-content").show();
     $("#print-content").hide();
+    $("#share-content").hide();
   }
 });
 
@@ -216,7 +237,7 @@ $("#submit, #nav, #submit_button").click(function() {
 // WWT Controls
 // !
 var wwt;
-var bShowCrosshairs = true;
+var bShowCrosshairs = false;
 var bShowUI = true;
 var bShowFigures = false;
 var bShowBoundaries = false;
@@ -232,7 +253,7 @@ function initializeWWT() {
 
 function FovInc() {
     var newFov = 2.0 * wwt.get_fov();
-    if (newFov <= 60) {
+    if (newFov <= 90) {
         wwt.goto(wwt.getRA()*15.0, wwt.getDec(), newFov, false);
     }
 }
@@ -362,11 +383,12 @@ function WWTSize() {
 function toggleFigures(){
     bShowFigures = !bShowFigures;
     wwt.settings.set_showConstellationFigures(bShowFigures);
+    wwt.settings.set_showHoverLabel(bShowFigures);
 }
 
 function toggleBoundaries(){
     bShowBoundaries = !bShowBoundaries;
-    wwt.settings.set_showConstellationBoundries(bShowBoundaries);  
+    wwt.settings.set_showConstellationBoundries(bShowBoundaries);
 }
 
 //Trigger WWT resize on window resize

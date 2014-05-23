@@ -11,13 +11,12 @@
         <meta name="viewport" content="width=device-width">
 
         <link rel="stylesheet" href="css/normalize.min.css">
-        <link rel="stylesheet" href="css/main.css">
+	<link rel="stylesheet" href="css/main.css">
         <link rel="stylesheet" href="css/jquery-ui-1.10.1.custom.min.css">
         <link rel="stylesheet" href="css/jquery.ui.timepicker.css">
         <link rel="stylesheet" href="js/vendor/vallenato/vallenato.css">
-
         <link rel="stylesheet" href="css/print.css" type="text/css" media="print" />
-
+        
         <script src="https://maps.googleapis.com/maps/api/js?sensor=false&amp;libraries=places"></script>
         <script src="js/vendor/jquery-1.9.1.min.js"></script>
         <script src="js/vendor/jquery-ui-1.10.1.custom.min.js"></script>
@@ -27,49 +26,15 @@
         <script src="js/vendor/jquery.geocomplete.min.js"></script>
         <script src="js/vendor/jquery.slides.min.js"></script>
         <script src="js/vendor/jquery.circlemenu.js"></script>
-
-<style type="text/css">
-    .tooltip
-    {
-      text-decoration:none;
-      position:relative;
-    }
-
-
-    .tooltip span
-    {
-      display:none;
-      -moz-border-radius:6px;
-      -webkit-border-radius:6px;
-      border-radius:6px;
-      color:black;
-      background:white; 
-    }
-
-
-    .tooltip span img
-    {
-      float:left;
-      margin:0px 8px 8px 0;
-    }
-
-
-    .tooltip:hover span
-    {
-      display:block;
-      position:absolute;<br>  top:0;<br>  left:0;
-      z-index:1000;
-      width:auto;
-      max-width:320px;
-      min-height:128px;
-      border:1px solid black;
-      margin-top:12px;
-      margin-left:32px;
-      overflow:hidden;
-      padding:8px;
-    }
-    </style>
-
+	<script src="js/jquery.prettyPhoto.js"></script>
+       <style>
+           .textbox {display:none;}
+           .question {display: block;}
+       </style>
+<link rel="stylesheet" href="css/prettyPhoto.css" type="text/css" media="screen" title="prettyPhoto main stylesheet" charset="utf-8" />
+		<script src="js/jquery.prettyPhoto.js" type="text/javascript" charset="utf-8"></script>
+        <link rel="stylesheet" href="css/helpbox.css">
+         <script src="js/i18next.js"></script>
 
 <!--
         <link media="all" type="text/css" href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.6/themes/smoothness/jquery-ui.css" rel="stylesheet"/>    
@@ -86,6 +51,23 @@
         });
     </script>
 -->
+
+  <script type='text/javascript'>
+  $(window).load(function(){
+  $( "#mt" ).tooltip({ content: '<img class="half" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/t1.0-1/c111.19.238.238/s160x160/430565_376164129076147_180932441_n.jpg" /><p>Martin Topinka</p>' });
+  $( "#eb" ).tooltip({ content: '<img class="half" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/t1.0-1/c113.33.414.414/s160x160/428981_10150744255460625_1952547470_n.jpg"/><p>Emer O Boyle</p>' });
+  $( "#lh" ).tooltip({ content: '<img class="half" src="http://www.shannonsideastronomyclub.com/images/lorraine_hanlon_thumbnail.jpg"/><p>Lorraine Hanlon</p>' });
+  $( "#rs" ).tooltip({ content: '<img class="half" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc1/t1.0-1/c0.0.160.160/p160x160/10154028_10152148997179010_2187989739791663011_n.jpg" /><p>Rob Simpson</p>' });
+  });
+  $(document).ready(function() {
+          $('.fb-share').click(function(e) {
+              e.preventDefault();
+              window.open($(this).attr('href'), 'fbShareWindow', 'height=450, width=550, top=' + ($(window).height() / 2 - 275) + ', left=' + ($(window).width() / 2 - 225) + ', toolbar=0, location=0, menubar=0, directories=0, scrollbars=0');
+              return false;
+          });
+      });
+      </script>    
+  
 </head>
     <body>
         <!--[if lt IE 7]>
@@ -95,7 +77,21 @@
         <!--[if lt IE 9]>
             <script src="js/virtualsky/excanvas.min.js" type="text/javascript"></script>
         <![endif]-->
+
         <div id="main-box" class="main-container">
+<!--
+        <div id="openModal" class="modalDialog">
+        <div>
+                <a id="videoToggleOff" href="#modalClose" title="Close" class="modalClose">x</a>
+                <h2>Video tour on how to use Personal Space</h2>
+                <p>Alternatively, you can <a href="manual.pdf">RTFM</a>.</p>
+                <iframe id="tutorial" title="YouTube video player" class="youtube-player" type="text/html" 
+                width="640" height="390" src="http://www.youtube.com/embed/W-Q7RMpINVo"
+                frameborder="0" allowFullScreen></iframe>
+        </div>
+            
+        </div>          
+//-->
 
             <div id="WWTCanvasPre" style="height:500px;960px;"></div>
             <div class="main wrapper clearfix">
@@ -109,30 +105,32 @@
                 </ul>
 
                 <span class="settings">
-                    <span class="label">Figures</span><input type="checkbox" id="figures" class="settings-check" name="figures" >
-                    <span class="label">Boundaries</span><input type="checkbox" id="boundaries" class="settings-check" name="boundaries" >
+                    <span class="label" data-i18n="figures">Constellations</span><input type="checkbox" id="figures" class="settings-check" name="figures" >
+                    <span class="label" data-i18n="boundaries">Boundaries</span><input type="checkbox" id="boundaries" class="settings-check" name="boundaries" >
                 </span>
+
+<script>
+var toggleFormVisible = true;
+</script>
 
                 <section class="popup">
                     <form id="getspace">
 
-                        <input class="toggle_form" type="button" id="toggle_form" value="Hide Form" />
-
-                        <label>Name</label>
-                        <input type="text" id="full_name" name="name" placeholder="Jane Doe" required>
-
-                        <label>Event Name</label>
-                        <input type="text" list="event_suggestions" id="event_name" name="event" placeholder="e.g. Birthday" required>
+                        <input class="toggle_form" type="button" id="toggle_form" data-i18n="[value]hide-form" value="Hide Form" />
+                        <label data-i18n="name">Name</label>
+                        <input type="text" id="full_name" name="name" data-i18n="[placeholder]placeholder_name" placeholder="Jane Doe" required>
+                        <label data-i18n="event-description">Event Description</label>
+                        <input type="text" list="event_suggestions" id="event_name" name="event" data-i18n="[placeholder]placeholder_event" placeholder="e.g. Birthday" required>
                         <datalist id="event_suggestions">
-                          <option value="Birthday">
-                          <option value="Wedding">
+                          <option data-i18n="[value]birthday" value="Birthday">
+                          <option data-i18n="[value]wedding" value="Wedding">
                         </datalist> 
-                        <label id="place_name_label">Location &#8596;</label>
+                        <label id="place_name_label" data-i18n="location">Location &#8596;</label>
                         <label id="lat_label">Lat &#8596;</label>
                         <label id="lon_label">Lon &#8596;</label>
                         <br/>
 
-                        <input type="text" id="place_name" name="place" placeholder="Oxford, UK" required>
+                        <input type="text" id="place_name" name="place" data-i18n="[placeholder]placeholder_location" placeholder="Oxford, UK" required>
                         <input type="text" data-geo="lat" id="latitude" name="lat" required>
                         <input type="text" data-geo="lng" id="longitude" name="lon" required>
                         <br id="coords_break"/>
@@ -141,15 +139,15 @@
                             <div class="map_canvas"></div>
                         </div>
 
-                        <label>Event Date</label>
+                        <label data-i18n="event-date">Event Date</label>
                         <input type="date" id="date" name="event_date" placeholder="2013-01-01" required>
 
-                        <label title="Time of event in local time at location">Local Time</label>
+                        <label title="Time of event in local time at location" data-i18n="local-time">Local Time</label>
                         <input title="Time of event in local time at location" type="time" id="time" name="event_time" placeholder="14:00" required>
 
-                        <label id="disclaimer">Submitted data may be displayed on this site when matches are found</label>
+                        <!-- <label id="disclaimer" data-i18n="disclaimer">Your event name may be displayed on this site when matches are found</label> //-->
 
-                        <input class="submit_button" type="submit" id="submit_button" value="Find Your Space" /> 
+                        <input class="submit_button" type="submit" id="submit_button" data-i18n="[value]find-your-space" value="Find Your Space" /> 
                     </form>
                 </section>
 
@@ -161,36 +159,41 @@
             <section id="background-container">
                 <section id="nav">
                     <ul>
-                        <li id="about" >About</li>
-                        <li id="gallery" >Gallery</li>
-                        <li id="print" class="last" >Print</li>
+                        <li id="about" data-i18n="about">About</li>
+                        <li id="gallery" data-i18n="gallery">Gallery</li>
+                        <li id="share" data-i18n="share">Share</li>
+                        <li id="print" class="last" data-i18n="print">Print</li>
                     </ul>
                 </section>
+                <div id="share-content" class="background">
+                    <div class="bgwrapper">
+                        <p><span data-i18n="share-shorturl">A short link to your Personal Space is</span> <a href="http://personal-space.eu" id="shortURL">http://personal-space.eu</a></p>
+                        <p>
+                        <span data-i18n="share-facebook">Share your Personal Space on</span>
+                        <a id="share-facebook" class="fb-share" href="https://www.facebook.com/sharer/sharer.php?u=http%3A%2F%2Fpersonal-space.eu" target="_blank">Facebook</a>
+                        </p>
+
+<p><span data-i18n="share-twitter">Share your Personal Space on</span>
+    <a id="share-twitter" class="fb-share" target="_blank" href="https://twitter.com/home?status=personal-space.eu">Twitter</a>
+</p>
+                    </div>
+                </div>
                 <div id="about-content" class="background" >
                     <div class="bgwrapper">
-                        <p>Personal Space is an Art-Science collaboration by artist Emer O Boyle
-                            and astronomers Lorraine Hanlon, Martin Topinka and Rob Simpson and
-                            was developed as part of the GLORIA project - the worlds first free
-                            and open access network of robotic telescopes.
-                        <p>With Personal Space you can see what part of the night sky was
-                        directly overhead at any significant moment in your life.
-                        You can see where your personal space or significant life moment
-                        has overlapped with other's in the night sky. Your space may
-                        even have overlapped with some of the political and historical
-                        events that we've added to the gallery.    
+                        <p data-i18n="[html]information1">
+                        Personal Space is an Art-Science collaboration by artist <a id="eb" href="#" title="" >Emer O Boyle</a> and astronomers <a id="lh" href="#" title="" >Lorraine Hanlon</a>, <a id="mt" href="#" title="" >Martin Topinka</a> and <a id="rs" href="#" title="" >Rob Simpson</a> and was developed as part of the GLORIA project - the worlds first free and open access network of robotic telescopes.
+                        <p data-i18n="information2">With Personal Space you can see what part of the night sky was directly overhead at any significant moment in your life. You can see where your personal space or significant life moment has overlapped with other's in the night sky. Your space may even have overlapped with some of the political and historical events that we've added to the gallery.</span>
                         <div class="thumb-center">
                             <img src="img/boywithballoon.jpg" class="half" />
                         </div>
-                        <p>As the earth rotates and follows it's orbit around our sun,
-                         our view of the stars continually changes.
+                        <p data-i18n="information3">As the earth rotates and follows it's orbit around our sun, our view of the stars continually changes.</span>
                         
                         <div class="thumb-center">
                             <img src="img/examples/celestial-sphere.gif" class="half" />
                         </div>
-                        <p class="ack">GLORIA is a project funded by the European Union Seventh
-                        Framework Programme (FP7/2007-2012) under grant agreement number 283783</p>
-                        <p class="ack">The site stores the information you provide in order to provide matches
-                            to other people's events and for no other purpose.
+                        <p data-i18n="ack1">GLORIA is a project funded by the European Union Seventh Framework Programme (FP7/2007-2012) under grant agreement number 283783.
+                        <p data-i18n="ack2">The site stores the information you provide in order to provide matches to other people's events and for no other purpose. Your event name may be displayed on this site when matches are found.
+                        </span>
 
                         <!--
                         <p>The stars remain stationary as the Earth rotates each day. As the Earth orbits the Sun, the stars we see each night slowly change.</p>
@@ -205,13 +208,15 @@
                             Personal Space relies on JavaScript and uses technology that is only available <a href="http://browsehappy.com/" target="_blank">through a modern web browser</a>.</p>
                         <p class="ack">GLORIA is a project funded by the European Union Seventh Framework Programme (FP7/2007-2012) under grant agreement number 283783</p>
                     -->
+                    
+
                     </div>
                 </div>
                 <div id="gallery-content" class="background" >
                     <section id="subnav">
                             <ul>
-                                <li id="historical" >Historical</li>
-                                <li id="political" class="inactive">Political</li>
+                                <li id="historical" data-i18n="historical">Historical</li>
+                                <li id="political" data-i18n="political" class="inactive">Political</li>
                                 <!--
                                 <li id="personal" class="last inactive" >Personal</li>
                                 -->
@@ -222,27 +227,27 @@
                             <div class="gallery">
                                 <div class="thumb">
                                     <a href="?name=Boston%20Tea%20Party&place=Boston&lat=42.3417&lon=-70.9661&datetime=1773-12-16%2019:00:00&event=Boston%20Tea%20Party&trigger=true"><img src="img/examples/tea-party.jpg" /></a>
-                                    <span class="caption">The Boston Tea Party<br/></span>
+                                    <span class="caption" data-i18n="boston-tea-party">The Boston Tea Party<br/></span>
                                 </div>
                                 <div class="thumb">
                                     <a href="?name=Bastille%20Day&place=Paris&lat=48.853056&lon=2.369167&datetime=1789-07-14%2013:30:00&event=Storming%20of%20the%20Bastille&trigger=true"><img src="img/examples/bastille.jpg" /></a>
-                                    <span class="caption">Storming of the Bastille</span>
+                                    <span class="caption" data-i18n="storming-of-bastille">Storming of the Bastille</span>
                                 </div>
                                 <div class="thumb">
                                     <a href="?name=Chernobyl+Disaster&place=Chernobyl&lat=51.3896&lon=30.0991&datetime=1986-04-26%2001:23:00&event=Chernobyl+Disaster&trigger=true"><img src="img/examples/chernobyl.jpg" /></a>
-                                    <span class="caption">Chernobyl Disaster</span>
+                                    <span class="caption" data-i18n="chernobyl-disaster">Chernobyl Disaster</span>
                                 </div>
                                 <div class="thumb">
                                     <a href="?name=Ghandi%20Birth&place=Porbandar%2C%20India&lat=21.64111&lon=69.60056&datetime=1869-10-02%2007:11:00&event=Ghandi%20Birth&trigger=true"><img src="img/examples/ghandi.jpg" /></a>
-                                    <span class="caption">Birth of Mahatma Ghandi</span>
+                                    <span class="caption" data-i18n="birth-of-ghandi">Birth of Mahatma Ghandi</span>
                                 </div>
                                 <div class="thumb">
                                     <a href="?name=Sinking%20of%20the%20Titanic&place=Atlantic+Ocean&lat=41.46&lon=-50.14&datetime=1912-04-14%2023:40:00&event=Sinking%20of%20the%20Titanic&trigger=true"><img src="img/examples/titanic.jpg" /></a>
-                                    <span class="caption">Sinking of the Titanic</span>
+                                    <span class="caption" data-i18n="sinking-of-titanic">Sinking of the Titanic</span>
                                 </div>
                                 <div class="thumb">
                                     <a href="?name=Launch%20of%20Apollo%2011&place=Kennedy%20Space%20Center&lat=28.6084&lon=-80.6043&datetime=1969-07-16%2008:32:00&event=Launch%20of%20Apollo%2011&trigger=true"><img src="img/examples/apollo11.jpg" /></a>
-                                    <span class="caption">Launch of Apollo 11</span>
+                                    <span class="caption" data-i18n="launch-of-appolo">Launch of Apollo 11</span>
                                 </div>
 
                             </div>
@@ -253,27 +258,27 @@
                             <div class="gallery">
                                 <div class="thumb">
                                     <a href="?name=Inauguration+of+Barack+Obama&place=Southeast+Drive%2C+Washington%2C+DC+20016%2C+USA&lat=38.88972&lon=-77.00889&datetime=2009-01-20%2012:00:00&event=Inauguration+of+Barack+Obama&trigger=true"><img src="img/examples/obama.jpg" /></a>
-                                    <span class="caption">Inauguration of Barack Obama</span>
+                                    <span class="caption" data-i18n="inauguration-obama">Inauguration of Barack Obama</span>
                                 </div>
                                 <div class="thumb">
                                     <a href="?name=Release+of+Nelson+Mandela&place=Victor+Verster+Prison&lat=-38.88972&lon=-77.00889&datetime=1990-02-11%2016:03:00&event=Release+of+Nelson+Mandela&trigger=true"><img src="img/examples/mandela.jpg" /></a>
-                                    <span class="caption">Release of Nelson Mandela</span>
+                                    <span class="caption" data-i18n="release-mandela">Release of Nelson Mandela</span>
                                 </div>
                                 <div class="thumb">
                                     <a href="?name=Berlin%20Wall&place=Berlin&lat=52.5167&lon=13.3833&datetime=1989-11-09%2021:00:00&event=Fall%20of%20the%20Berlin%20Wall&trigger=true"><img src="img/examples/berlin-wall.jpg" /></a>
-                                    <span class="caption">Fall of the Berlin wall</span>
+                                    <span class="caption" data-i18n="fall-of-berlin-wall">Fall of the Berlin wall</span>
                                 </div>
                                 <div class="thumb">
                                     <a href="?name=9%2F11&place=New+York&lat=40.7117&lon=-74.0125&datetime=2001-09-11%2008:46:30&event=9%2F11+Attacks+on+New+York&trigger=true"><img src="img/examples/911.jpg" /></a>
-                                    <span class="caption">9/11 Attacks on New York</span>
+                                    <span class="caption" data-i18n="ny911">9/11 Attacks on New York</span>
                                 </div>
                                 <div class="thumb">
                                     <a href="?name=Good+Friday+agreement&place=Belfast&lat=54.6020&lon=-5.8302&datetime=1998-04-10%2017:00:00&event=Good+Friday+agreement&trigger=true"><img src="img/examples/goodfriday.jpg" /></a>
-                                    <span class="caption">Good Friday Agreement</span>
+                                    <span class="caption" data-i18n="good-friday">Good Friday Agreement</span>
                                 </div>
                                 <div class="thumb">
                                     <a href="?name=JFK%20Assassination&place=Dallas%2C%20Texas&lat=32.71278&lon=-96.80833&datetime=1963-11-22%2008:32:00&event=JFK%20Assassination&trigger=true"><img src="img/examples/jfk.jpg" /></a>
-                                    <span class="caption">Assassination of JFK</span>
+                                    <span class="caption" data-i18n="assassination-jfk">Assassination of JFK</span>
                                 </div>
 
                             </div>
@@ -317,9 +322,16 @@
                 </div>
             </section>
             <aside>
-                <p><a href="https://docs.google.com/forms/d/1SuF_fPanD5M_RzvkmfQ-fe23YrarYXY-b-zGUc1q_9k/viewform">Help us improve</a> &middot; Supported by the <a href="http://ec.europa.eu/index_en.htm">European Commission</a></p>
+                <p>
+                
+                    <a id="en" href="?setLng=en"><img  class"country-flag" src="img/en_US.png" alt="EN"></a> <a id="cz" href="?setLng=cz"><img class"country-flag" src="img/cs_CZ.png" alt="CZ"></a> &middot;
+               <span data-i18n="need-help">Need help?</span>
+	       <a href="http://www.youtube.com/watch?v=vVUx02UiIYw" rel="prettyPhoto" data-i18n="watch-the-tour;[title]tutorial-title" title="How to use Personal Space">Watch the tour</a>
+                &middot; 
+<a href="https://docs.google.com/forms/d/1SuF_fPanD5M_RzvkmfQ-fe23YrarYXY-b-zGUc1q_9k/viewform" data-i18n="help-us-improve">Help us improve</a> &middot; <span data-i18n="supported-by">Supported by the</span> <a href="http://ec.europa.eu/index_en.htm" data-i18n="european-commission">European Commission</a></p>
             </aside>
         </div>
+
 
         <section class="zoom-container">
             <div id="zoom_in" class="zoom_button">+</div>
@@ -327,11 +339,15 @@
             <div id="gloria-logo" class="logo"><a href="http://www.gloria-project.eu"><img title="Part of the GLORIA Project" src="img/logo-gloria.png" /></a></div>
         </section>
 
-        <div class="info-container">          
-            <section>
-                <p>Welcome to <b>Personal Space</b>.</p>
-                <p>The stars remain stationary as the Earth rotates each day. As the Earth orbits the Sun, the stars we see each night slowly change.</p>
-                <p>Think of a significant event in your life and enter the details of its date, time and location on the right. We'll use this to locate your <b>Personal Space</b> - the region of the sky that was directly overhead at that exact moment.</p>
+        <div class="info-container">
+              <section>
+                <p data-i18n="[html]roundinfo-container1">Welcome to <b>Personal Space</b>.</p>
+                <p data-i18n="[html]roundinfo-container2">Think of a significant event in your life and enter the details of its date, time and location in the form on the right.</p>
+		<p data-i18n="[html]roundinfo-container3">We'll use this to locate your <b>Personal Space</b> - the region of the sky that was directly overhead at that exact moment.</p>
+                <p>
+		<span data-i18n="need-help">Need help?</span>
+		<a href="http://www.youtube.com/watch?v=vVUx02UiIYw" rel="prettyPhoto" data-i18n="watch-the-tour;[title]tutorial-title" title="How to use Personal Space">Watch the tour</a>
+		<p>
                 <button id="info-okay">Okay</button>
             </section>
         </div> 
@@ -341,7 +357,6 @@
         <div class="footer-container">          
             <section>
                 <img id="pTitle" class="logo" src="img/personal-space-logo.png" alt="Personal Space" />
-                <p id="shortURL"></p>
             </section>
         </div>
 
@@ -366,8 +381,8 @@
             $(document).ready(function(){
                 setupPage();
 
-                // var thisURL = "http://127.0.0.1/~toast/personalspace/";
-                var thisURL = "http://personal-space.eu";
+                 var thisURL = "http://127.0.0.1/~toast/personalspace/";
+                //var thisURL = "http://personal-space.eu";
                 
                 $(".gallery .thumb a").each(function() {
                    $(this).attr("href", thisURL+ $(this).attr("href"));
@@ -416,6 +431,29 @@
                 }, 3000);
 
         </script>
+
+    <script>
+	    $.i18n.init({
+	        // lng: 'en-US',
+	        ns: { namespaces: ['translation'], defaultNs: 'translation'},
+	        useLocalStorage: false,
+	        debug: true
+	    }, function() {
+    	//    $('#about').text($.t('translation:about'));
+            $('#watch-the-tour').text($.t('translation:watch-the-tour'));
+        //$('#gallery').text($.t('translation:gallery'));
+        //$('#print').text($.t('translation:print'));
+	        // $('.info').i18n();
+	        // $('.ack').i18n();
+            $('body').i18n(); 
+	    });
+	    </script>
+
+<script type="text/javascript" charset="utf-8">
+  $(document).ready(function(){
+    $("a[rel^='prettyPhoto']").prettyPhoto({show_title:true,allow_resize:true,default_width:500,theme:'light_square',social_tools:''});
+  });
+</script>
 
     </body>
 </html>
