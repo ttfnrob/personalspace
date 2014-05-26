@@ -1,1 +1,6 @@
-.DS_Store	
+.DS_Store
+js/.DS_Store
+js/vendor/.DS_Store
+js/vendor/vallenato/.DS_Store
+js/vendor/vallenato/images/.DS_Store
+js/virtualsky/.DS_Store

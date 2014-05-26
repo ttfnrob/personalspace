@@ -54,10 +54,10 @@
 
   <script type='text/javascript'>
   $(window).load(function(){
-  $( "#mt" ).tooltip({ content: '<img class="half" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/t1.0-1/c111.19.238.238/s160x160/430565_376164129076147_180932441_n.jpg" /><p>Martin Topinka</p>' });
-  $( "#eb" ).tooltip({ content: '<img class="half" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/t1.0-1/c113.33.414.414/s160x160/428981_10150744255460625_1952547470_n.jpg"/><p>Emer O Boyle</p>' });
-  $( "#lh" ).tooltip({ content: '<img class="half" src="http://www.shannonsideastronomyclub.com/images/lorraine_hanlon_thumbnail.jpg"/><p>Lorraine Hanlon</p>' });
-  $( "#rs" ).tooltip({ content: '<img class="half" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc1/t1.0-1/c0.0.160.160/p160x160/10154028_10152148997179010_2187989739791663011_n.jpg" /><p>Rob Simpson</p>' });
+  $( "#mt" ).tooltip({ content: '<img class="half" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/t1.0-1/c111.19.238.238/s160x160/430565_376164129076147_180932441_n.jpg" /><p class="vcard"><b>Martin Topinka</b><br>University College Dublin<br><a href="http://toastmaker.wordpress.com">http://toastmaker.wordpress.com</a></p>' });
+  $( "#eb" ).tooltip({ content: '<img class="half" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-ash2/t1.0-1/c113.33.414.414/s160x160/428981_10150744255460625_1952547470_n.jpg"/><p class="vcard"><b>Emer O Boyle</b><br>University College Dublin</p>' });
+  $( "#lh" ).tooltip({ content: '<img class="half" src="http://www.shannonsideastronomyclub.com/images/lorraine_hanlon_thumbnail.jpg"/><p class="vcard"><b>Lorraine Hanlon</b><br>University College Dublin</p>' });
+  $( "#rs" ).tooltip({ content: '<img class="half" src="https://fbcdn-profile-a.akamaihd.net/hprofile-ak-frc1/t1.0-1/c0.0.160.160/p160x160/10154028_10152148997179010_2187989739791663011_n.jpg" /><p class="vcard"><b>Rob Simpson</b><br>University of Oxford<br><a href="http://orbitingfrog.com">http://orbitingfrog.com</a></p>' });
   });
   $(document).ready(function() {
           $('.fb-share').click(function(e) {
@@ -381,8 +381,8 @@ var toggleFormVisible = true;
             $(document).ready(function(){
                 setupPage();
 
-                 var thisURL = "http://127.0.0.1/~toast/personalspace/";
-                //var thisURL = "http://personal-space.eu";
+                // var thisURL = "http://127.0.0.1/~toast/personalspace/";
+                var thisURL = "http://personal-space.eu";
                 
                 $(".gallery .thumb a").each(function() {
                    $(this).attr("href", thisURL+ $(this).attr("href"));

@@ -1170,3 +1170,6 @@ p.ack {
   line-height: 12px;
   color: #666;
 }
+p.vcard {
+  font-size: 11px;
+}
