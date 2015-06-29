@@ -153,7 +153,7 @@ function makeURL() {
     long_url = location.protocol + '//' + location.host + location.pathname+'?'+encodeURI(formData);
 
     $.ajax({
-        url: 'https://www.googleapis.com/urlshortener/v1/url',
+        url: 'https://www.googleapis.com/urlshortener/v1/url?key=AIzaSyBjbuyasa8r-sCsSNfqUPQm-yfXeFRxPxQ',
         type: 'POST',
         contentType: 'application/json; charset=utf-8',
         data: '{"longUrl": "'+long_url+'"}',
